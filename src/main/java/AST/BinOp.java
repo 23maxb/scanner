@@ -1,5 +1,5 @@
 package AST;
 
-public class BinOp extends Statement
+public class BinOp extends Expression
 {
 }

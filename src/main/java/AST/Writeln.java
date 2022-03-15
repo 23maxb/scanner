@@ -2,19 +2,21 @@ package AST;
 
 public class Writeln extends Statement
 {
-private String Expression;
+    private Expression exp;
 
-public Writeln(String e)
-{
-    e = Expression;
+    public Writeln(Expression exp)
+    {
+        this.exp = exp;
+    }
+
+
+    @Override
+    public void exec(Environment env)
+    {
+        System.out.println(exp.evaluate(env));
+    }
 }
 
-public void exec()
-{
-    System.out.println(new eva)
-}
-
-}
 
 
 

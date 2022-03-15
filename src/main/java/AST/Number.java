@@ -1,5 +1,7 @@
 package AST;
 
-public class Number extends Statement
+public class Number extends Expression
 {
+
+
 }

@@ -1,5 +1,6 @@
 package parser;
 
+import AST.*;
 import scanner.ScanErrorException;
 import scanner.Scanner;
 
@@ -120,15 +121,16 @@ public class Parser
     /**
      * Parses a statement such as WRITELN or setting variable value.
      */
-    private void parseStatement() throws ScanErrorException
+    private Statement parseStatement() throws ScanErrorException
     {
-        if (currentToken.compareTo("WRITELN") == 0)
+        if (Objects.equals(currentToken, "WRITELN"))
         {
             eat("WRITELN");
             eat("(");
-            System.out.println(parseExpression());
+            Expression exp = parseExpression();
             eat(")");
             eat(";");
+            return new Writeln(exp);
         }
         else if (currentToken.compareTo("BEGIN") == 0)
             eat(currentToken);
