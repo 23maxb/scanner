@@ -11,7 +11,6 @@ public class Block extends Statement
         this.statements = statements;
     }
 
-    //TODO: implement this!
     public void exec(Environment e)
     {
         for (Statement statement : statements)
