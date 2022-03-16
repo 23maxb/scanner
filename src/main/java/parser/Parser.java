@@ -1,6 +1,7 @@
 package parser;
 
 import AST.*;
+import AST.Number;
 import scanner.ScanErrorException;
 import scanner.Scanner;
 
@@ -127,7 +128,7 @@ public class Parser
         {
             eat("WRITELN");
             eat("(");
-            Expression exp = parseExpression();
+            Expression exp = new Number(parseExpression());
             eat(")");
             eat(";");
             return new Writeln(exp);
