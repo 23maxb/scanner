@@ -7,6 +7,7 @@ import scanner.Scanner;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -24,6 +25,7 @@ public class Parser
     private Scanner scanner;
     private String currentToken;
     private HashMap<String, Integer> variables;
+    public Environment currentEnvironment;
 
     /**
      * Used to test
@@ -34,7 +36,8 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\analyst\\IdeaProjects\\scanner2 + \\src\\main\\java\\parser\\parserTest4.txt");
+        run("C:\\Users\\analyst\\IdeaProjects\\scanner2 + \\src\\main\\java\\parser\\parserTest4" +
+                ".txt");
     }
 
     /**
@@ -90,8 +93,11 @@ public class Parser
      */
     public void run() throws ScanErrorException
     {
+        ArrayList<Statement> a = new ArrayList<>();
+
         while (scanner.hasNext())
-            parseStatement();
+            a.add(parseStatement());
+        (new Block(a)).exec(currentEnvironment);
     }
 
     /**
@@ -134,7 +140,12 @@ public class Parser
             return new Writeln(exp);
         }
         else if (currentToken.compareTo("BEGIN") == 0)
-            eat(currentToken);
+        {
+            ArrayList<Statement> b = new ArrayList<>();
+            while (currentToken.compareTo("END") != 0)
+                b.add(parseStatement());
+            return new Block(b);
+        }
         else if (currentToken.compareTo("END") == 0)
         {
             eat("END");
@@ -148,6 +159,7 @@ public class Parser
             variables.put(varName, parseExpression());
             eat(currentToken);
         }
+        throw new IllegalArgumentException("Unkown token: " + currentToken + ".");
     }
 
     /**
