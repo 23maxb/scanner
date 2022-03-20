@@ -49,7 +49,7 @@ public class Parser
     {
         this.scanner = s;
         currentToken = scanner.nextToken();
-        variables = new HashMap<>();
+        currentEnvironment = new Environment();
     }
 
     /**
@@ -237,7 +237,7 @@ public class Parser
             eat(currentToken);
             return new Number(toReturn);
         }
-        for (Map.Entry<String, Integer> entry : variables.entrySet())
+        for (Map.Entry<String, Integer> entry : currentEnvironment.get.entrySet())
             if (currentToken.compareTo(entry.getKey()) == 0)
             {
                 eat(currentToken);

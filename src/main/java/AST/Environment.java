@@ -4,7 +4,17 @@ import java.util.HashMap;
 
 public class Environment
 {
-    HashMap<String, Object> a = new HashMap<>();
+    public HashMap<String, Object> allVars;
+
+    public Environment()
+    {
+        allVars = new HashMap<>();
+    }
+
+    public Environment(HashMap<String, Object> a)
+    {
+        allVars = a;
+    }
 
     //associates the given variable name with the given value
     public void setVariable(String variable, Object value)
@@ -16,6 +26,11 @@ public class Environment
 //name
     public Object getVariable(String variable)
     {
-        return a.get(variable);
+        return allVars.get(variable);
+    }
+
+    public HashMap<String, Object> getAllVars()
+    {
+        return allVars;
     }
 }
