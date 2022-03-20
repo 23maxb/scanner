@@ -8,6 +8,10 @@ public class BinOp extends Expression
         this.val2 = val2;
         this.operator = operator;
     }
+    public BinOp(Expression val1, String operator, Expression val2)
+    {
+        this(val1, val2, operator);
+    }
 
     public Expression val1;
     public Expression val2;

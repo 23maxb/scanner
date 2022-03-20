@@ -24,7 +24,6 @@ public class Parser
 
     private Scanner scanner;
     private String currentToken;
-    private HashMap<String, Integer> variables;
     public Environment currentEnvironment;
 
     /**
@@ -218,25 +217,25 @@ public class Parser
      * @return the value
      * @throws ScanErrorException if the end of file is reached
      */
-    private int parseFactor() throws ScanErrorException
+    private Expression parseFactor() throws ScanErrorException
     {
         if (Objects.equals(currentToken, "("))
         {
             eat("(");
-            int a = parseTerm();
+            Expression a = parseTerm();
             eat(")");
             return a;
         }
         else if (Objects.equals(currentToken, "-"))
         {
             eat("-");
-            return parseFactor() * -1;
+            return new BinOp(parseFactor(), "*", new Number(-1));
         }
         else if (isInteger(currentToken))
         {
             int toReturn = Integer.parseInt(currentToken);
             eat(currentToken);
-            return toReturn;
+            return new Number(toReturn);
         }
         for (Map.Entry<String, Integer> entry : variables.entrySet())
             if (currentToken.compareTo(entry.getKey()) == 0)
