@@ -200,12 +200,12 @@ public class Parser
             if (currentToken.equals("*"))
             {
                 eat("*");
-                res = res * parseFactor();
+                res = new BinOp(res, "*", parseFactor());
             }
             else
             {
                 eat("/");
-                res = res / parseFactor();
+                res = new BinOp(res, "/", parseFactor());
             }
         }
         return res;
