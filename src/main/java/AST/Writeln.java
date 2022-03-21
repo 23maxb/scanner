@@ -17,6 +17,14 @@ public class Writeln extends Statement
     {
         System.out.println(exp.evaluate(env));
     }
+
+    @Override
+    public String toString()
+    {
+        return "WRITELN(" + exp.toString() + ")";
+    }
+
+
 }
 
 

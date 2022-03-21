@@ -21,4 +21,11 @@ public class WhileLoop extends Statement
             b.exec(env);
         }
     }
+
+    @Override
+    public String toString()
+    {
+        return "WHILE(" + b.toString() + ")";
+    }
+
 }

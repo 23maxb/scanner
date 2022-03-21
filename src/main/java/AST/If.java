@@ -7,7 +7,7 @@ public class If extends Statement
     public Expression condition;
     public Block b;
 
-    public If(Expression condition, Environment env)
+    public If(Expression condition)
     {
         this.condition = condition;
     }
@@ -20,5 +20,11 @@ public class If extends Statement
         {
             b.exec(env);
         }
+    }
+
+    @Override
+    public String toString()
+    {
+        return null;
     }
 }

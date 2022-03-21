@@ -38,4 +38,10 @@ public class Assignment extends Statement
     {
         e.setVariable(variableName, value);
     }
+
+    @Override
+    public String toString()
+    {
+        return "Assignment(" + variableName + " to " + value.toString() + ")";
+    }
 }

@@ -20,4 +20,10 @@ public class Block extends Statement
             statement.exec(e);
         }
     }
+
+    @Override
+    public String toString()
+    {
+        return "Block(" + statements.toString() + ")";
+    }
 }
