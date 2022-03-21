@@ -17,4 +17,10 @@ public class Number extends Expression
     {
         return number;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Number(" + number + ")";
+    }
 }

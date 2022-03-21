@@ -16,4 +16,12 @@ public class Variable extends Expression
     {
         return e.getVariable(name);
     }
+
+    @Override
+    public String toString()
+    {
+        return "Variable(" + name + ")";
+    }
+
+
 }

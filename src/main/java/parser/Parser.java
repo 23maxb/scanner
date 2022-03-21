@@ -151,8 +151,10 @@ public class Parser
         String varName = currentToken;
         eat(currentToken);
         eat(":=");
+        Expression a = parseExpression();
+        System.out.println(a);//TODO
         Statement toReturn = new Assignment(varName,
-                parseExpression().evaluate(currentEnvironment));
+                a.evaluate(currentEnvironment));
         eat(currentToken);
         return toReturn;
     }

@@ -10,6 +10,7 @@ public class BinOp extends Expression
         this.val2 = val2;
         this.operator = operator;
     }
+
     public BinOp(Expression val1, String operator, Expression val2)
     {
         this(val1, val2, operator);
@@ -37,7 +38,14 @@ public class BinOp extends Expression
                     case "==" -> (int) val1.evaluate(e) == (int) val2.evaluate(e);
                     case "&&" -> (boolean) val1.evaluate(e) && (boolean) val2.evaluate(e);
                     case "||" -> (boolean) val1.evaluate(e) || (boolean) val2.evaluate(e);
-                    default -> throw new IllegalArgumentException("Operator '" + operator + "' not recognized!");
+                    default -> throw new IllegalArgumentException("Operator '" + operator + "' " +
+                            "not recognized!");
                 };
+    }
+
+    @Override
+    public String toString()
+    {
+        return "BinaryOperator(" + val1 + " " + operator + " " + val2 + ")";
     }
 }
