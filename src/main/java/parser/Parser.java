@@ -192,9 +192,9 @@ public class Parser
      * @return the value of the parsed term
      * @throws ScanErrorException if an error is encountered with the scanner
      */
-    private int parseTerm() throws ScanErrorException
+    private Expression parseTerm() throws ScanErrorException
     {
-        int res = parseFactor();
+        Expression res = parseFactor();
         while (currentToken.equals("*") || currentToken.equals("/"))
         {
             if (currentToken.equals("*"))
@@ -237,13 +237,9 @@ public class Parser
             eat(currentToken);
             return new Number(toReturn);
         }
-        for (Map.Entry<String, Integer> entry : currentEnvironment.get.entrySet())
-            if (currentToken.compareTo(entry.getKey()) == 0)
-            {
-                eat(currentToken);
-                return entry.getValue();
-            }
-        throw new IllegalArgumentException(currentToken + " was not a valid expression!");
+        //if the current token is not an integer or a () or a subtraction
+        eat(currentToken);
+        return new Variable(currentToken);
     }
 
     /**

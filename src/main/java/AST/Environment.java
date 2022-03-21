@@ -19,7 +19,7 @@ public class Environment
     //associates the given variable name with the given value
     public void setVariable(String variable, Object value)
     {
-        a.put(variable, value);
+        allVars.put(variable, value);
     }
 
     //returns the value associated with the given variable
