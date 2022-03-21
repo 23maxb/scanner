@@ -33,7 +33,7 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\analyst\\IdeaProjects\\scanner2\\src\\main\\java\\parser\\parserTest3.txt");
+        run("C:\\Users\\analyst\\IdeaProjects\\scanner2\\src\\main\\java\\parser\\parserTest4.txt");
     }
 
     /**
@@ -141,27 +141,18 @@ public class Parser
             eat("BEGIN");
             while (currentToken.compareTo("END") != 0)
             {
-                System.out.println(currentToken);
                 b.add(parseStatement());
             }
             eat("END");
             eat(";");
             return new Block(b);
         }
-        else if (currentToken.compareTo("END") == 0)
-        {
-            eat("END");
-            eat(";");
-        }
-        else
-        {
-            String varName = currentToken;
-            eat(currentToken);
-            eat(":=");
-            currentEnvironment.setVariable(varName, parseExpression().evaluate(currentEnvironment));
-            eat(currentToken);
-        }
-        throw new IllegalArgumentException("Unkown token: " + currentToken + ".");
+        String varName = currentToken;
+        eat(currentToken);
+        eat(":=");
+        Statement toReturn = new Assignment(varName, parseExpression().evaluate(currentEnvironment));
+        eat(currentToken);
+        return toReturn;
     }
 
     /**
