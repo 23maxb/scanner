@@ -9,6 +9,7 @@ public class Number extends Expression
         this.number = number;
     }
 
+
     @Override
     public Object evaluate(Environment e)
     {
