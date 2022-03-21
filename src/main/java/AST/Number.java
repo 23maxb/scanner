@@ -1,5 +1,7 @@
 package AST;
 
+import environment.Environment;
+
 public class Number extends Expression
 {
     public int number;

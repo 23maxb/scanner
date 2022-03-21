@@ -1,5 +1,7 @@
 package AST;
 
+import environment.Environment;
+
 public class WhileLoop extends Statement
 {
     public Expression condition;

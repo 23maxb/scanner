@@ -1,5 +1,7 @@
 package AST;
 
+import environment.Environment;
+
 public class If extends Statement
 {
     public Expression condition;

@@ -1,5 +1,7 @@
 package AST;
 
+import environment.Environment;
+
 public class Writeln extends Statement
 {
     private Expression exp;

@@ -1,5 +1,7 @@
 package AST;
 
+import environment.Environment;
+
 public class BinOp extends Expression
 {
     public BinOp(Expression val1, Expression val2, String operator)

@@ -1,4 +1,4 @@
-package AST;
+package environment;
 
 import java.util.HashMap;
 

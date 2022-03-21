@@ -1,5 +1,7 @@
 package AST;
 
+import environment.Environment;
+
 public class Variable extends Expression
 {
     public String name;

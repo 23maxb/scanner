@@ -2,6 +2,7 @@ package parser;
 
 import AST.*;
 import AST.Number;
+import environment.Environment;
 import scanner.ScanErrorException;
 import scanner.Scanner;
 
@@ -150,7 +151,8 @@ public class Parser
         String varName = currentToken;
         eat(currentToken);
         eat(":=");
-        Statement toReturn = new Assignment(varName, parseExpression().evaluate(currentEnvironment));
+        Statement toReturn = new Assignment(varName,
+                parseExpression().evaluate(currentEnvironment));
         eat(currentToken);
         return toReturn;
     }

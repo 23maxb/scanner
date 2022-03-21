@@ -1,5 +1,7 @@
 package AST;
 
+import environment.Environment;
+
 public class Assignment extends Statement
 {
     public String variableName;
