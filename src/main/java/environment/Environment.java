@@ -29,6 +29,11 @@ public class Environment
         return allVars.get(variable);
     }
 
+    public boolean hasVariable(String a)
+    {
+        return getAllVars().containsKey(a);
+    }
+
     public HashMap<String, Object> getAllVars()
     {
         return allVars;

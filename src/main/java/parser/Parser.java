@@ -94,6 +94,7 @@ public class Parser
 
         while (scanner.hasNext())
             a.add(parseStatement());
+        System.out.println(a);
         (new Block(a)).exec(currentEnvironment);
     }
 
@@ -151,10 +152,8 @@ public class Parser
         String varName = currentToken;
         eat(currentToken);
         eat(":=");
-        Expression a = parseExpression();
-        System.out.println(a);//TODO
         Statement toReturn = new Assignment(varName,
-                a.evaluate(currentEnvironment));
+                parseExpression());
         eat(currentToken);
         return toReturn;
     }
@@ -236,8 +235,10 @@ public class Parser
             return new Number(toReturn);
         }
         //if the current token is not an integer or a () or a subtraction
+        String a = currentToken;
         eat(currentToken);
-        return new Variable(currentToken);
+        return new Variable(a);
+
     }
 
     /**

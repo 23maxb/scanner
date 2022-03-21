@@ -14,7 +14,9 @@ public class Variable extends Expression
     @Override
     public Object evaluate(Environment e)
     {
-        return e.getVariable(name);
+        if (e.hasVariable(name))
+            return e.getVariable(name);
+        throw new IllegalArgumentException("The variable '" + name + "' has not been declared.");
     }
 
     @Override
