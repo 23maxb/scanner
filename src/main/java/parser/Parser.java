@@ -167,20 +167,20 @@ public class Parser
      * @return the value that the program gets
      * @throws ScanErrorException if there is an error scanning
      */
-    private int parseExpression() throws ScanErrorException
+    private Expression parseExpression() throws ScanErrorException
     {
-        int res = (parseTerm());
+        Expression res = (parseTerm());
         while ((currentToken.equals("+") || currentToken.equals("-")))
         {
             if (currentToken.equals("+"))
             {
                 eat("+");
-                res = res + parseTerm();
+                res = new BinOp(res, "+", parseTerm());
             }
             else
             {
                 eat("-");
-                res = res - parseTerm();
+                res = new BinOp(res, "-", parseTerm());
             }
         }
         return res;
