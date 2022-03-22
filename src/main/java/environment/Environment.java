@@ -38,4 +38,10 @@ public class Environment
     {
         return allVars;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Environment ("+getAllVars().toString()+")";
+    }
 }

@@ -7,9 +7,10 @@ public class If extends Statement
     public Expression condition;
     public Block b;
 
-    public If(Expression condition)
+    public If(Expression condition, Block b)
     {
         this.condition = condition;
+        b = block;
     }
 
 

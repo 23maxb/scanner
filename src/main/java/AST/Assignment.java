@@ -21,14 +21,14 @@ public class Assignment extends Statement
         return value;
     }
 
-    public void setValue(Object value)
+    public void setValue(Expression value)
     {
         this.value = value;
     }
 
-    public Object value;
+    public Expression value;
 
-    public Assignment(String variableName, Object value)
+    public Assignment(String variableName, Expression value)
     {
         this.variableName = variableName;
         this.value = value;
@@ -36,7 +36,7 @@ public class Assignment extends Statement
 
     public void exec(Environment e)
     {
-        e.setVariable(variableName, value);
+        e.setVariable(variableName, value.evaluate(e));
     }
 
     @Override

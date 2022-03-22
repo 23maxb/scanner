@@ -149,6 +149,14 @@ public class Parser
             eat(";");
             return new Block(b);
         }
+        else if (currentToken.compareTo("IF") == 0)
+        {
+            eat("IF");
+            Expression a = parseExpression();
+            eat("DO");
+            Block b = (Block) parseStatement();
+            return new If(a, b);
+        }
         String varName = currentToken;
         eat(currentToken);
         eat(":=");
@@ -238,7 +246,6 @@ public class Parser
         String a = currentToken;
         eat(currentToken);
         return new Variable(a);
-
     }
 
     /**
