@@ -1,7 +1,7 @@
 package parser;
 
-import AST.*;
-import AST.Number;
+import ast.*;
+import ast.Number;
 import environment.Environment;
 import scanner.ScanErrorException;
 import scanner.Scanner;
@@ -34,7 +34,7 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\analyst\\IdeaProjects\\scanner2\\src\\main\\java\\parser\\hi.txt");
+        run("C:\\Users\\analyst\\IdeaProjects\\scanner2\\src\\main\\java\\parser\\parserTest6.txt");
     }
 
     /**
@@ -174,9 +174,9 @@ public class Parser
     }
 
     /**
-     * Handles any + or /
+     * Handles conditional statements
      *
-     * @return the value that the program gets
+     * @return the conditional with everyting evaluated
      * @throws ScanErrorException if there is an error scanning
      */
     private Expression parseConditional() throws ScanErrorException
@@ -187,27 +187,27 @@ public class Parser
             if (currentToken.equals(">"))
             {
                 eat(">");
-                res = new BinOp(res, ">", parseTerm());
+                res = new BinOp(res, ">", parseExpression());
             }
             else if (currentToken.compareTo("<") == 0)
             {
                 eat("<");
-                res = new BinOp(res, "<", parseTerm());
+                res = new BinOp(res, "<", parseExpression());
             }
             else if (currentToken.compareTo("<=") == 0)
             {
                 eat("<=");
-                res = new BinOp(res, "<=", parseTerm());
+                res = new BinOp(res, "<=", parseExpression());
             }
             else if (currentToken.compareTo(">=") == 0)
             {
                 eat(">=");
-                res = new BinOp(res, ">=", parseTerm());
+                res = new BinOp(res, ">=", parseExpression());
             }
             else
             {
                 eat("<>");
-                res = new BinOp(res, "<>", parseTerm());
+                res = new BinOp(res, "<>", parseExpression());
             }
         }
         return res;

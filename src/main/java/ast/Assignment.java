@@ -1,7 +1,10 @@
-package AST;
+package ast;
 
 import environment.Environment;
 
+/**
+ *
+ */
 public class Assignment extends Statement
 {
     public String variableName;
@@ -34,6 +37,7 @@ public class Assignment extends Statement
         this.value = value;
     }
 
+    @Override
     public void exec(Environment e)
     {
         e.setVariable(variableName, value.evaluate(e));

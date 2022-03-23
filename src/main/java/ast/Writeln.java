@@ -1,4 +1,4 @@
-package AST;
+package ast;
 
 import environment.Environment;
 
@@ -10,7 +10,6 @@ public class Writeln extends Statement
     {
         this.exp = exp;
     }
-
 
     @Override
     public void exec(Environment env)

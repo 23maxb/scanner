@@ -1,4 +1,4 @@
-package AST;
+package ast;
 
 import environment.Environment;
 
