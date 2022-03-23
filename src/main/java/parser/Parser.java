@@ -62,6 +62,7 @@ public class Parser
         String a = currentToken;
         if (currentToken.equals(expected))
         {
+            //double declaration needed to reassign currentToken DO NOT DELETE
             currentToken = scanner.nextToken().replace(" ", "");
             return currentToken;
         }
@@ -169,6 +170,7 @@ public class Parser
         eat(":=");
         Statement toReturn = new Assignment(varName, parseExpression());
         eat(currentToken);
+        System.out.println(toReturn);
         return toReturn;
     }
 
