@@ -34,7 +34,7 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\analyst\\IdeaProjects\\scanner2\\src\\main\\java\\parser\\parserTest4.txt");
+        run("C:\\Users\\analyst\\IdeaProjects\\scanner2\\src\\main\\java\\parser\\parserTest6.txt");
     }
 
     /**
@@ -186,8 +186,7 @@ public class Parser
             {
                 eat("-");
                 res = new BinOp(res, "-", parseTerm());
-            }
-        }
+            }        }
         return res;
     }
 
