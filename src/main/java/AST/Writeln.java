@@ -15,7 +15,7 @@ public class Writeln extends Statement
     @Override
     public void exec(Environment env)
     {
-        System.out.println(exp.evaluate(env));
+        exp.evaluate(env);
     }
 
     @Override

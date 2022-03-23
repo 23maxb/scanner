@@ -7,9 +7,10 @@ public class WhileLoop extends Statement
     public Expression condition;
     public Block b;
 
-    public WhileLoop(Expression condition, Environment env)
+    public WhileLoop(Expression condition, Block block)
     {
         this.condition = condition;
+        b = block;
     }
 
 

@@ -23,58 +23,24 @@ public class BinOp extends Expression
     @Override
     public Object evaluate(Environment e)
     {
-        System.out.println(this);
-        Object o;
-        switch (operator)
-        {
-            case "+":
-                System.out.println("a");
-                o = (int) val1.evaluate(e) + (int) val2.evaluate(e);
-                break;
-            case "-":
-                o = (int) val1.evaluate(e) - (int) val2.evaluate(e);
-                break;
-            case "/":
-                o = (int) val1.evaluate(e) / (int) val2.evaluate(e);
-                break;
-            case "*":
-                System.out.println(val1.evaluate(e));
-                System.out.println(val2.evaluate(e));
-                System.out.println(e);
-                o = (((int) val1.evaluate(e)) * (int) (val2.evaluate(e)));
-                break;
-            case "%":
-            case "MOD":
-                o = (int) val1.evaluate(e) % (int) val2.evaluate(e);
-                break;
-            case ">":
-                o = (int) val1.evaluate(e) > (int) val2.evaluate(e);
-                break;
-            case "<":
-                o = (int) val1.evaluate(e) < (int) val2.evaluate(e);
-                break;
-            case ">=":
-                o = (int) val1.evaluate(e) >= (int) val2.evaluate(e);
-                break;
-            case "<=":
-                o = (int) val1.evaluate(e) <= (int) val2.evaluate(e);
-                break;
-            case "<>":
-                o = (int) val1.evaluate(e) != (int) val2.evaluate(e);
-                break;
-            case "==":
-                o = (int) val1.evaluate(e) == (int) val2.evaluate(e);
-                break;
-            case "&&":
-                o = (boolean) val1.evaluate(e) && (boolean) val2.evaluate(e);
-                break;
-            case "||":
-                o = (boolean) val1.evaluate(e) || (boolean) val2.evaluate(e);
-                break;
-            default:
-                throw new IllegalArgumentException("Operator '" + operator + "' " +
-                        "not recognized!");
-        }
+        Object o = switch (operator)
+                {
+                    case "+" -> (int) val1.evaluate(e) + (int) val2.evaluate(e);
+                    case "-" -> (int) val1.evaluate(e) - (int) val2.evaluate(e);
+                    case "/" -> (int) val1.evaluate(e) / (int) val2.evaluate(e);
+                    case "*" -> (((int) val1.evaluate(e)) * (int) (val2.evaluate(e)));
+                    case "%", "MOD" -> (int) val1.evaluate(e) % (int) val2.evaluate(e);
+                    case ">" -> (int) val1.evaluate(e) > (int) val2.evaluate(e);
+                    case "<" -> (int) val1.evaluate(e) < (int) val2.evaluate(e);
+                    case ">=" -> (int) val1.evaluate(e) >= (int) val2.evaluate(e);
+                    case "<=" -> (int) val1.evaluate(e) <= (int) val2.evaluate(e);
+                    case "<>" -> (int) val1.evaluate(e) != (int) val2.evaluate(e);
+                    case "==" -> (int) val1.evaluate(e) == (int) val2.evaluate(e);
+                    case "&&" -> (boolean) val1.evaluate(e) && (boolean) val2.evaluate(e);
+                    case "||" -> (boolean) val1.evaluate(e) || (boolean) val2.evaluate(e);
+                    default -> throw new IllegalArgumentException("Operator '" + operator + "' " +
+                            "not recognized!");
+                };
         return o;
     }
 

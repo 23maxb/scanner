@@ -91,7 +91,6 @@ public class Parser
     public void run() throws ScanErrorException
     {
         ArrayList<Statement> a = new ArrayList<>();
-
         while (scanner.hasNext())
             a.add(parseStatement());
         System.out.println(a);
@@ -156,6 +155,14 @@ public class Parser
             eat("THEN");
             Block b = (Block) parseStatement();
             return new If(a, b);
+        }
+        else if (currentToken.compareTo("WHILE") == 0)
+        {
+            eat("WHILE");
+            Expression a = parseConditional();
+            eat("DO");
+            Block b = (Block) parseStatement();
+            return new WhileLoop(a, b);
         }
         String varName = currentToken;
         eat(currentToken);
