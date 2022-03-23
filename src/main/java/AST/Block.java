@@ -16,9 +16,7 @@ public class Block extends Statement
     public void exec(Environment e)
     {
         for (Statement statement : statements)
-        {
             statement.exec(e);
-        }
     }
 
     @Override

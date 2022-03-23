@@ -1,1 +1,10 @@
-2*52
+BEGIN
+	x := 2;
+	WRITELN(x);
+	IF x > 3 THEN
+	BEGIN
+		WRITELN(x);
+		WRITELN(5);
+	END;
+END;
+.

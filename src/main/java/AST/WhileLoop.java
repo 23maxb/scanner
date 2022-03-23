@@ -26,7 +26,7 @@ public class WhileLoop extends Statement
     @Override
     public String toString()
     {
-        return "WHILE(" + condition + "then" + b.toString() + ")";
+        return "WHILE(" + condition + " DO: " + b.toString() + ")";
     }
 
 }

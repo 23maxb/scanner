@@ -26,6 +26,6 @@ public class If extends Statement
     @Override
     public String toString()
     {
-        return "IF(" + condition + "THEN" + b + ")";
+        return "IF(" + condition + " THEN: " + b + ")";
     }
 }

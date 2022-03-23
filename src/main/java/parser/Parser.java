@@ -34,7 +34,7 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\analyst\\IdeaProjects\\scanner2\\src\\main\\java\\parser\\parserTest6.txt");
+        run("C:\\Users\\analyst\\IdeaProjects\\scanner2\\src\\main\\java\\parser\\hi.txt");
     }
 
     /**
@@ -170,7 +170,6 @@ public class Parser
         eat(":=");
         Statement toReturn = new Assignment(varName, parseExpression());
         eat(currentToken);
-        System.out.println(toReturn);
         return toReturn;
     }
 
