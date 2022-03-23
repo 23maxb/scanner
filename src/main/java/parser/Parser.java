@@ -152,18 +152,57 @@ public class Parser
         else if (currentToken.compareTo("IF") == 0)
         {
             eat("IF");
-            Expression a = parseExpression();
-            eat("DO");
+            Expression a = parseConditional();
+            eat("THEN");
             Block b = (Block) parseStatement();
             return new If(a, b);
         }
         String varName = currentToken;
         eat(currentToken);
         eat(":=");
-        Statement toReturn = new Assignment(varName,
-                parseExpression());
+        Statement toReturn = new Assignment(varName, parseExpression());
         eat(currentToken);
         return toReturn;
+    }
+
+    /**
+     * Handles any + or /
+     *
+     * @return the value that the program gets
+     * @throws ScanErrorException if there is an error scanning
+     */
+    private Expression parseConditional() throws ScanErrorException
+    {
+        Expression res = (parseExpression());
+        while ((currentToken.equals(">") || currentToken.equals("<") || currentToken.equals("<=") || currentToken.equals(">=") || currentToken.equals("<>")))
+        {
+            if (currentToken.equals(">"))
+            {
+                eat(">");
+                res = new BinOp(res, ">", parseTerm());
+            }
+            else if (currentToken.compareTo("<") == 0)
+            {
+                eat("<");
+                res = new BinOp(res, "<", parseTerm());
+            }
+            else if (currentToken.compareTo("<=") == 0)
+            {
+                eat("<=");
+                res = new BinOp(res, "<=", parseTerm());
+            }
+            else if (currentToken.compareTo(">=") == 0)
+            {
+                eat(">=");
+                res = new BinOp(res, ">=", parseTerm());
+            }
+            else
+            {
+                eat("<>");
+                res = new BinOp(res, "<>", parseTerm());
+            }
+        }
+        return res;
     }
 
     /**
@@ -186,7 +225,8 @@ public class Parser
             {
                 eat("-");
                 res = new BinOp(res, "-", parseTerm());
-            }        }
+            }
+        }
         return res;
     }
 
