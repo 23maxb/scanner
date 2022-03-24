@@ -2,15 +2,32 @@ package ast;
 
 import environment.Environment;
 
+/**
+ * Represents a variable in pascal
+ *
+ * @author Max Blennemann
+ * @version 3/23/22
+ */
 public class Variable extends Expression
 {
     public String name;
 
+    /**
+     * Creates a variable object with the name given.
+     *
+     * @param name the name of the variable
+     */
     public Variable(String name)
     {
         this.name = name;
     }
 
+    /**
+     * Evaluates the variable with the value and environment given
+     *
+     * @param e the enviornment to pull variable values from
+     * @return the evaluation
+     */
     @Override
     public Object evaluate(Environment e)
     {
@@ -19,6 +36,11 @@ public class Variable extends Expression
         throw new IllegalArgumentException("The variable '" + name + "' has not been declared.");
     }
 
+    /**
+     * Returns a string representation of the object.
+     *
+     * @return a string representation of the object.
+     */
     @Override
     public String toString()
     {

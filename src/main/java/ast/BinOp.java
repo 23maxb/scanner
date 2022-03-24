@@ -2,8 +2,22 @@ package ast;
 
 import environment.Environment;
 
+/**
+ * Supports operations like adding and subtracting in addition to conditional operators
+ * like plus and minus
+ *
+ * @author Max Blennemann
+ * @version 3/23/22
+ */
 public class BinOp extends Expression
 {
+    /**
+     * Creates a BinOp object that will be used to evaluate something
+     *
+     * @param val1     The first value of the operation
+     * @param val2     the second value of the operation
+     * @param operator the operator to use
+     */
     public BinOp(Expression val1, Expression val2, String operator)
     {
         this.val1 = val1;
@@ -11,6 +25,13 @@ public class BinOp extends Expression
         this.operator = operator;
     }
 
+    /**
+     * Creates a BinOp object that will be used to evaluate something
+     *
+     * @param val1     The first value of the operation
+     * @param val2     the second value of the operation
+     * @param operator the operator to use
+     */
     public BinOp(Expression val1, String operator, Expression val2)
     {
         this(val1, val2, operator);
@@ -20,10 +41,16 @@ public class BinOp extends Expression
     public Expression val2;
     public String operator;
 
+    /**
+     * Evaluates a BinOp using a switch case statement
+     *
+     * @param e the environment with variable values to use
+     * @return the evaluated result
+     */
     @Override
     public Object evaluate(Environment e)
     {
-        Object o = switch (operator)
+        return switch (operator)
                 {
                     case "+" -> (int) val1.evaluate(e) + (int) val2.evaluate(e);
                     case "-" -> (int) val1.evaluate(e) - (int) val2.evaluate(e);
@@ -41,9 +68,13 @@ public class BinOp extends Expression
                     default -> throw new IllegalArgumentException("Operator '" + operator + "' " +
                             "not recognized!");
                 };
-        return o;
     }
 
+    /**
+     * Returns a string representation of the binary operator.
+     *
+     * @return a string representation of the binary operator.
+     */
     @Override
     public String toString()
     {

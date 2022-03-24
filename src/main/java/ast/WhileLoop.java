@@ -2,18 +2,34 @@ package ast;
 
 import environment.Environment;
 
+/**
+ * Represents a while loop.
+ *
+ * @author Max Blennemann
+ * @version 3/23/22
+ */
 public class WhileLoop extends Statement
 {
     public Expression condition;
     public Block b;
 
+    /**
+     * Creates a WhileLoop with the given parameters
+     *
+     * @param condition The condition to test for the while loop
+     * @param block     The block to execute while the condition is true
+     */
     public WhileLoop(Expression condition, Block block)
     {
         this.condition = condition;
         b = block;
     }
 
-
+    /**
+     * Do the block while the condition is true.
+     *
+     * @param env the environment to pull variable values from
+     */
     @Override
     public void exec(Environment env)
     {
@@ -23,6 +39,11 @@ public class WhileLoop extends Statement
         }
     }
 
+    /**
+     * Returns a string representation of the object
+     *
+     * @return a string representation of the object
+     */
     @Override
     public String toString()
     {
