@@ -7,7 +7,6 @@ import environment.Environment;
  *
  * @author Max Blennemann
  * @version 3/23/22
- *
  */
 public class Writeln extends Statement
 {
@@ -36,6 +35,7 @@ public class Writeln extends Statement
 
     /**
      * Returns a string representation of the object
+     *
      * @return a string representation of the object
      */
     @Override
