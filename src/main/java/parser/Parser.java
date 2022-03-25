@@ -93,20 +93,39 @@ public class Parser
      */
     public void run() throws ScanErrorException
     {
+        ArrayList<ProcedureDeclaration> procedures = new ArrayList<>();
         ArrayList<Statement> a = new ArrayList<>();
-
         while (scanner.hasNext())
             if (declaring)
-                a.add(parseDeclaration());
+                procedures.add(parseDeclaration());
             else
                 a.add(parseStatement());
         System.out.println(a);
         (new Block(a)).exec(currentEnvironment);
     }
 
-    private Statement parseDeclaration()
+    private ProcedureDeclaration parseDeclaration() throws ScanErrorException
     {
-        
+        eat("PROCEDURE");
+        String methodName = currentToken;
+        eat(currentToken);
+        eat("(");
+        ArrayList<Variable> parameters = new ArrayList<>();
+        for (; ; )
+        {
+            parameters.add(new Variable(currentToken));
+            eat(currentToken);
+            if (currentToken.compareTo(")") == 0)
+            {
+                eat(")");
+                break;
+            }
+            else
+                eat(",");
+        }
+        eat(";");
+        return new ProcedureDeclaration(methodName, parseStatement(), new Environment(),
+                parameters.toArray(Variable[]::new));
     }
 
     /**
