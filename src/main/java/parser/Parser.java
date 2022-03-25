@@ -21,10 +21,10 @@ import java.util.Objects;
 public class Parser
 {
 
-    private Scanner scanner;
+    private final Scanner scanner;
     private String currentToken;
-    private boolean declaring;
     public Environment currentEnvironment;
+    public ArrayList<ProcedureDeclaration> procedures;
 
     /**
      * Used to test
@@ -46,7 +46,6 @@ public class Parser
      */
     public Parser(Scanner s) throws ScanErrorException
     {
-        declaring = true;
         this.scanner = s;
         currentToken = scanner.nextToken();
         currentEnvironment = new Environment();
@@ -93,10 +92,10 @@ public class Parser
      */
     public void run() throws ScanErrorException
     {
-        ArrayList<ProcedureDeclaration> procedures = new ArrayList<>();
+        procedures = new ArrayList<>();
         ArrayList<Statement> a = new ArrayList<>();
         while (scanner.hasNext())
-            if (declaring)
+            if (currentToken.compareTo("PROCEDURE") == 0)
                 procedures.add(parseDeclaration());
             else
                 a.add(parseStatement());
@@ -195,6 +194,10 @@ public class Parser
             Block b = (Block) parseStatement();
             return new WhileLoop(a, b);
         }
+        for(int i = 0; procedures.size() > i; i++)
+        {
+            procedures.get(i).
+        }
         String varName = currentToken;
         eat(currentToken);
         eat(":=");
@@ -251,6 +254,7 @@ public class Parser
      */
     private Expression parseExpression() throws ScanErrorException
     {
+
         Expression res = (parseTerm());
         while ((currentToken.equals("+") || currentToken.equals("-")))
         {

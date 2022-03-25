@@ -40,6 +40,45 @@ public class ProcedureDeclaration
         this(statement, name, env, parameters);
     }
 
+    public Statement getStatement()
+    {
+        return statement;
+    }
+
+    public void setStatement(Statement statement)
+    {
+        this.statement = statement;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    public Environment getEnv()
+    {
+        return env;
+    }
+
+    public void setEnv(Environment env)
+    {
+        this.env = env;
+    }
+
+    public Variable[] getParameters()
+    {
+        return parameters;
+    }
+
+    public void setParameters(Variable[] parameters)
+    {
+        this.parameters = parameters;
+    }
 
     @Override
     public String toString()
