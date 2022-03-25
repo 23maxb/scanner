@@ -23,6 +23,7 @@ public class Parser
 
     private Scanner scanner;
     private String currentToken;
+    private boolean declaring;
     public Environment currentEnvironment;
 
     /**
@@ -45,6 +46,7 @@ public class Parser
      */
     public Parser(Scanner s) throws ScanErrorException
     {
+        declaring = true;
         this.scanner = s;
         currentToken = scanner.nextToken();
         currentEnvironment = new Environment();
@@ -92,10 +94,19 @@ public class Parser
     public void run() throws ScanErrorException
     {
         ArrayList<Statement> a = new ArrayList<>();
+
         while (scanner.hasNext())
-            a.add(parseStatement());
+            if (declaring)
+                a.add(parseDeclaration());
+            else
+                a.add(parseStatement());
         System.out.println(a);
         (new Block(a)).exec(currentEnvironment);
+    }
+
+    private Statement parseDeclaration()
+    {
+        
     }
 
     /**
