@@ -1,10 +1,14 @@
 package environment;
 
+import ast.ProcedureDeclaration;
+import ast.Statement;
+
 import java.util.HashMap;
 
-public class Environment
+public class Environment implements Cloneable
 {
     public HashMap<String, Object> allVars;
+    public HashMap<String, ProcedureDeclaration> allProcedures;
 
     public Environment()
     {
@@ -14,6 +18,11 @@ public class Environment
     public Environment(HashMap<String, Object> a)
     {
         allVars = a;
+    }
+    public Environment(HashMap<String, Object> a, HashMap<String, ProcedureDeclaration> b)
+    {
+        this(a);
+        this.setAllProcedures(b);
     }
 
     //associates the given variable name with the given value
@@ -34,6 +43,26 @@ public class Environment
         return getAllVars().containsKey(a);
     }
 
+    public void setAllVars(HashMap<String, Object> allVars)
+    {
+        this.allVars = allVars;
+    }
+
+    public HashMap<String, ProcedureDeclaration> getAllProcedures()
+    {
+        return allProcedures;
+    }
+
+    public void setAllProcedures(HashMap<String, ProcedureDeclaration> allProcedures)
+    {
+        this.allProcedures = allProcedures;
+    }
+
+    public void addProcedure(String name, ProcedureDeclaration procedureDeclaration)
+    {
+        allProcedures.put(name, procedureDeclaration);
+    }
+
     public HashMap<String, Object> getAllVars()
     {
         return allVars;
@@ -42,6 +71,17 @@ public class Environment
     @Override
     public String toString()
     {
-        return "Environment ("+getAllVars().toString()+")";
+        return "Environment (" + getAllVars().toString() + ")";
+    }
+
+    public boolean hasProcedure(String procedureCalled)
+    {
+        return getAllProcedures().containsKey(procedureCalled);
+    }
+
+    @Override
+    public Environment clone()
+    {
+        return new Environment(new HashMap<>(getAllVars()), new HashMap<>(getAllProcedures()));
     }
 }

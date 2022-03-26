@@ -22,10 +22,20 @@ public class Variable extends Expression
         this.name = name;
     }
 
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
     /**
      * Evaluates the variable with the value and environment given
      *
-     * @param e the enviornment to pull variable values from
+     * @param e the environment to pull variable values from
      * @return the evaluation
      */
     @Override

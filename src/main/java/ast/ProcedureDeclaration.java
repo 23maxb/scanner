@@ -22,22 +22,21 @@ public class ProcedureDeclaration
      *
      * @param statement  the statement(s) to run if the program is called
      * @param name       the name of the method
-     * @param env        the enviornment to be run in
      * @param parameters the parameters that are required for this method to run
      */
-    public ProcedureDeclaration(Statement statement, String name, Environment env,
+    public ProcedureDeclaration(Statement statement, String name,
                                 Variable[] parameters)
     {
         this.statement = statement;
         this.name = name;
-        this.env = env;
         this.parameters = parameters;
+        env = new Environment();
     }
 
-    public ProcedureDeclaration(String name, Statement statement, Environment env,
+    public ProcedureDeclaration(String name, Statement statement,
                                 Variable[] parameters)
     {
-        this(statement, name, env, parameters);
+        this(statement, name, parameters);
     }
 
     public Statement getStatement()
@@ -84,5 +83,11 @@ public class ProcedureDeclaration
     public String toString()
     {
         return "Method: (" + name + "," + statement + ")";
+    }
+
+    public void exec(Environment currentEnvironment)
+    {
+        currentEnvironment.addProcedure(name, this);
+
     }
 }

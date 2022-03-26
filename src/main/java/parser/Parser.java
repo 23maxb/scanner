@@ -123,7 +123,7 @@ public class Parser
                 eat(",");
         }
         eat(";");
-        return new ProcedureDeclaration(methodName, parseStatement(), new Environment(),
+        return new ProcedureDeclaration(methodName, parseStatement(),
                 parameters.toArray(Variable[]::new));
     }
 
@@ -194,9 +194,26 @@ public class Parser
             Block b = (Block) parseStatement();
             return new WhileLoop(a, b);
         }
-        for(int i = 0; procedures.size() > i; i++)
+        for (ProcedureDeclaration procedure : procedures)
         {
-            procedures.get(i).
+            if (procedure.getName().compareTo(currentToken) == 0)
+            {
+                eat(currentToken);
+                eat("(");
+                ArrayList<Expression> b = new ArrayList<>();
+                for (; ; )
+                {
+                    eat(currentToken);
+                    if (currentToken.compareTo(")") == 0)
+                    {
+                        eat(")");
+                        break;
+                    }
+                    else
+                        eat(",");
+                }
+                procedure.exec(currentEnvironment, b.toArray(Expression[]::new));
+            }
         }
         String varName = currentToken;
         eat(currentToken);
