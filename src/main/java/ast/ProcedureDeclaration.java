@@ -33,17 +33,34 @@ public class ProcedureDeclaration
         env = new Environment();
     }
 
+    /**
+     * Creates a procedure declaration object that creates a method that can be referenced later
+     *
+     * @param name       Method name
+     * @param statement  the statement to run usually a block
+     * @param parameters the parameters that are required for this method to run
+     */
     public ProcedureDeclaration(String name, Statement statement,
                                 Variable[] parameters)
     {
         this(statement, name, parameters);
     }
 
+    /**
+     * Gets the statement
+     *
+     * @return the statement to be run when this procedure is called
+     */
     public Statement getStatement()
     {
         return statement;
     }
 
+    /**
+     * Sets a new procedure to be run instead
+     *
+     * @param statement the new statement to be run
+     */
     public void setStatement(Statement statement)
     {
         this.statement = statement;

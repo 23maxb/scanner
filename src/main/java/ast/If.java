@@ -8,7 +8,7 @@ import environment.Environment;
  * @author Max Blennemann
  * @version 3/23/22
  */
-public class If extends Statement
+public class If implements Statement
 {
     public Expression condition;
     public Block b;

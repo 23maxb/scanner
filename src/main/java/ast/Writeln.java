@@ -8,7 +8,7 @@ import environment.Environment;
  * @author Max Blennemann
  * @version 3/23/22
  */
-public class Writeln extends Statement
+public class Writeln implements Statement
 {
     private Expression exp;
 

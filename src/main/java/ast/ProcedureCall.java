@@ -1,32 +1,47 @@
 package ast;
 
 import environment.Environment;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class ProcedureCall
+public class ProcedureCall implements Statement, Expression
 {
 
     private final String procedureCalled;
+    private final Expression[] arguments;
 
-    public ProcedureCall(String procedureCalled)
+    public ProcedureCall(String procedureCalled, Expression[] arguments)
     {
         this.procedureCalled = procedureCalled;
+        this.arguments = arguments;
+    }
+
+    public String getProcedureCalled()
+    {
+        return procedureCalled;
     }
 
     @Override
-    public void exec(Environment env, Object... args)
+    public void exec(@NotNull Environment env)
     {
         if (env.hasProcedure(procedureCalled))
         {
-            Environment newEnvironment = (Environment) env.getAllVars().clone();
+            Environment newEnvironment = env.clone();
+            ProcedureDeclaration pro = env.getProcedure(procedureCalled);
             ArrayList<Statement> statements = new ArrayList<>();
-            for (int i = 0; i < args.length; i++)
+            for (int i = 0; i < pro.getParameters().length; i++)
             {
-                new Assignment(parameters[i].getName(), args[i]).exec(newEnvironment);
-                statement.exec(newEnvironment);
-            }*/
+                new Assignment(pro.getParameters()[i].getName(), arguments[i]).exec(newEnvironment);
+                pro.getStatement().exec(newEnvironment);
+            }
         }
+    }
+
+    @Override
+    public Object evaluate(Environment e)
+    {
+        return e.getVariable(procedureCalled);
     }
 
     @Override

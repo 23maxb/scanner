@@ -84,4 +84,9 @@ public class Environment implements Cloneable
     {
         return new Environment(new HashMap<>(getAllVars()), new HashMap<>(getAllProcedures()));
     }
+
+    public ProcedureDeclaration getProcedure(String procedureCalled)
+    {
+        return getAllProcedures().get(procedureCalled);
+    }
 }

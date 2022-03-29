@@ -8,7 +8,7 @@ import environment.Environment;
  * @author Max Blennmenan
  * @version 3/23/22
  */
-public class Assignment extends Statement
+public class Assignment implements Statement
 {
     public String variableName;
 

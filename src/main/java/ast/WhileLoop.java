@@ -8,7 +8,7 @@ import environment.Environment;
  * @author Max Blennemann
  * @version 3/23/22
  */
-public class WhileLoop extends Statement
+public class WhileLoop implements Statement
 {
     public Expression condition;
     public Block b;

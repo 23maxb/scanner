@@ -8,7 +8,7 @@ import environment.Environment;
  * @author Max Blennemann
  * @version 3/23/22
  */
-public class Number extends Expression
+public class Number implements Expression
 {
     public int number;
 

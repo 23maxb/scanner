@@ -8,7 +8,7 @@ import environment.Environment;
  * @author Max Blennemann
  * @version 3/23/22
  */
-public class Variable extends Expression
+public class Variable implements Expression
 {
     public String name;
 

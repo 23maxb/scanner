@@ -9,7 +9,7 @@ import environment.Environment;
  * @version 3/23/22
  *
  */
-public abstract class Statement
+public interface Statement
 {
     /**
      * Executes the statement and does whatever operation is needed.

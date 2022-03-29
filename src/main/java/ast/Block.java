@@ -10,7 +10,7 @@ import java.util.List;
  * @author Max Blennemann
  * @version 3/23/22
  */
-public class Block extends Statement
+public class Block implements Statement
 {
     private List<Statement> statements;
 

@@ -194,32 +194,19 @@ public class Parser
             Block b = (Block) parseStatement();
             return new WhileLoop(a, b);
         }
-        for (ProcedureDeclaration procedure : procedures)
+        else if (currentToken.compareTo("RETURN") == 0)
         {
-            if (procedure.getName().compareTo(currentToken) == 0)
-            {
-                eat(currentToken);
-                eat("(");
-                ArrayList<Expression> b = new ArrayList<>();
-                for (; ; )
-                {
-                    eat(currentToken);
-                    if (currentToken.compareTo(")") == 0)
-                    {
-                        eat(")");
-                        break;
-                    }
-                    else
-                        eat(",");
-                }
-                procedure.exec(currentEnvironment, b.toArray(Expression[]::new));
-            }
+            eat("RETURN");
+            Expression toReturn = parseExpression();
+
         }
+
+        // varName represents the variable name or the procedure name
         String varName = currentToken;
         eat(currentToken);
         eat(":=");
         Statement toReturn = new Assignment(varName, parseExpression());
-        eat(currentToken);
+        eat(";");
         return toReturn;
     }
 
@@ -341,9 +328,36 @@ public class Parser
             return new Number(toReturn);
         }
         //if the current token is not an integer or a () or a subtraction
-        String a = currentToken;
+        //need to check if it's a variable or a procedure call
+        String a = currentToken; // a is the name of the variable or procedure
         eat(currentToken);
-        return new Variable(a);
+        if (Objects.equals(currentToken, "("))
+        {
+            for (ProcedureDeclaration procedure : procedures)
+            {
+                if (procedure.getName().compareTo(a) == 0)
+                {
+                    eat("(");
+                    ArrayList<Expression> b = new ArrayList<>();
+                    for (; ; )
+                    {
+                        b.add(parseExpression());
+                        if (currentToken.compareTo(")") == 0)
+                        {
+                            eat(")");
+                            break;
+                        }
+                        else
+                            eat(",");
+                    }
+                    return new ProcedureCall(procedure.getName(), b.toArray(Expression[]::new));
+                }
+            }
+            //If all procedures were searched and none have the right name
+            throw new RuntimeException("Procedure " + a + " not found");
+        }
+        else
+            return new Variable(a);
     }
 
     /**

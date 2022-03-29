@@ -9,7 +9,7 @@ import environment.Environment;
  * @author Max Blennemann
  * @version 3/23/22
  */
-public class BinOp extends Expression
+public class BinOp implements Expression
 {
     /**
      * Creates a BinOp object that will be used to evaluate something
