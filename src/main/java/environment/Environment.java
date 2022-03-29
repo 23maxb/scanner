@@ -9,20 +9,43 @@ public class Environment implements Cloneable
 {
     public HashMap<String, Object> allVars;
     public HashMap<String, ProcedureDeclaration> allProcedures;
+    public boolean isGlobal;
 
     public Environment()
     {
         allVars = new HashMap<>();
     }
 
+    public boolean isGlobal()
+    {
+        return isGlobal;
+    }
+
+    public void setGlobal(boolean global)
+    {
+        isGlobal = global;
+    }
+
+    public Environment(boolean isGlobal)
+    {
+        this(new HashMap<>(), new HashMap<>(), isGlobal);
+    }
+
     public Environment(HashMap<String, Object> a)
     {
         allVars = a;
+        setGlobal(true);
     }
     public Environment(HashMap<String, Object> a, HashMap<String, ProcedureDeclaration> b)
     {
         this(a);
         this.setAllProcedures(b);
+    }
+    public Environment(HashMap<String, Object> a, HashMap<String, ProcedureDeclaration> b, boolean global)
+    {
+        this(a);
+        this.setAllProcedures(b);
+        this.setGlobal(global);
     }
 
     //associates the given variable name with the given value

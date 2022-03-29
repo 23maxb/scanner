@@ -200,7 +200,6 @@ public class Parser
             Expression toReturn = parseExpression();
 
         }
-
         // varName represents the variable name or the procedure name
         String varName = currentToken;
         eat(currentToken);
