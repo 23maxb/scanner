@@ -9,43 +9,40 @@ public class Environment implements Cloneable
 {
     public HashMap<String, Object> allVars;
     public HashMap<String, ProcedureDeclaration> allProcedures;
-    public boolean isGlobal;
+    public Environment parent;
+
+    public Environment(HashMap<String, Object> a, HashMap<String, ProcedureDeclaration> b)
+    {
+        this.allVars = a;
+        this.setAllProcedures(b);
+    }
 
     public Environment()
     {
-        allVars = new HashMap<>();
+        this(new HashMap<>(), new HashMap<>());
+    }
+    public Environment(Environment parent)
+    {
+        this(new HashMap<>(), new HashMap<>());
+        setParent(parent);
     }
 
-    public boolean isGlobal()
+    public Environment(HashMap<String, Object> a, HashMap<String, ProcedureDeclaration> b, Environment env)
     {
-        return isGlobal;
+        this(a, b);
+        setParent(env);
     }
 
-    public void setGlobal(boolean global)
+    private void setParent(Environment parent)
     {
-        isGlobal = global;
+        this.parent = parent;
     }
 
-    public Environment(boolean isGlobal)
+    public Environment getParent()
     {
-        this(new HashMap<>(), new HashMap<>(), isGlobal);
-    }
-
-    public Environment(HashMap<String, Object> a)
-    {
-        allVars = a;
-        setGlobal(true);
-    }
-    public Environment(HashMap<String, Object> a, HashMap<String, ProcedureDeclaration> b)
-    {
-        this(a);
-        this.setAllProcedures(b);
-    }
-    public Environment(HashMap<String, Object> a, HashMap<String, ProcedureDeclaration> b, boolean global)
-    {
-        this(a);
-        this.setAllProcedures(b);
-        this.setGlobal(global);
+        if (parent != null)
+            return parent;
+        return this;
     }
 
     //associates the given variable name with the given value
@@ -105,7 +102,7 @@ public class Environment implements Cloneable
     @Override
     public Environment clone()
     {
-        return new Environment(new HashMap<>(getAllVars()), new HashMap<>(getAllProcedures()));
+        return new Environment(new HashMap<>(getAllVars()), new HashMap<>(getAllProcedures()), this);
     }
 
     public ProcedureDeclaration getProcedure(String procedureCalled)
