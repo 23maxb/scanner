@@ -4,6 +4,7 @@ import environment.Environment;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 public class ProcedureCall implements Statement, Expression
@@ -53,6 +54,14 @@ public class ProcedureCall implements Statement, Expression
     @Override
     public String toString()
     {
-        return "Procedure( " + procedureCalled + ")";
+        StringBuilder sb = new StringBuilder();
+        Arrays.stream(arguments).forEachOrdered(argument ->
+        {
+            sb.append(argument.toString());
+            sb.append(", ");
+        });
+        if (arguments.length > 0)
+            sb.delete(sb.length() - 2, sb.length());
+        return "Procedure(" + procedureCalled + "(" + sb + ")" + ")";
     }
 }

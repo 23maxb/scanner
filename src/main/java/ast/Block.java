@@ -33,7 +33,10 @@ public class Block implements Statement
     public void exec(Environment e)
     {
         for (Statement statement : statements)
+        {
+            System.out.println(statement.toString());
             statement.exec(e);
+        }
     }
 
     /**
