@@ -2,8 +2,6 @@ package ast;
 
 import environment.Environment;
 
-import java.util.ArrayList;
-
 /**
  * Represents an abstract syntax tree in a pascal program.
  *
@@ -14,7 +12,6 @@ public class ProcedureDeclaration
 {
     public Statement statement;
     public String name;
-    public Environment env;
     public Variable[] parameters;
 
     /**
@@ -30,7 +27,6 @@ public class ProcedureDeclaration
         this.statement = statement;
         this.name = name;
         this.parameters = parameters;
-        env = new Environment();
     }
 
     /**
@@ -74,16 +70,6 @@ public class ProcedureDeclaration
     public void setName(String name)
     {
         this.name = name;
-    }
-
-    public Environment getEnv()
-    {
-        return env;
-    }
-
-    public void setEnv(Environment env)
-    {
-        this.env = env;
     }
 
     public Variable[] getParameters()

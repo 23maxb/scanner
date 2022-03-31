@@ -35,7 +35,7 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\analyst\\IdeaProjects\\scanner2\\src\\main\\java\\parser\\parserTest6.txt");
+        run("C:\\Users\\analyst\\IdeaProjects\\scanner2\\src\\main\\java\\parser\\parserTest8.txt");
     }
 
     /**

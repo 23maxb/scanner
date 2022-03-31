@@ -302,6 +302,11 @@ public class Scanner
                 debug("operand:");
                 return scanOperand();
             }
+            if (currentChar == (','))
+            {
+                eat(',');
+                return ",";
+            }
             if (isDigit(currentChar))
             {
                 debug("Number:");
