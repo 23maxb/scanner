@@ -27,7 +27,9 @@ public class ProcedureCall implements Statement, Expression
     @Override
     public void exec(@NotNull Environment env)
     {
-        Environment newEnvironment = new Environment(env);
+        System.out.println("all procedures:"  );
+        System.out.println(env.getAllProcedures());
+        Environment newEnvironment;
         if (env.hasProcedure(procedureCalled))
         {
             newEnvironment = env.clone();
@@ -39,15 +41,16 @@ public class ProcedureCall implements Statement, Expression
             }
         }
         else
-            throw new IllegalArgumentException("Procedure " + procedureCalled + " not found");
+            throw new IllegalArgumentException("Procedure '" + procedureCalled + "' not found");
         for (Map.Entry<String, Object> entry : newEnvironment.getAllVars().entrySet())
-            if (env.hasVariable(entry.getKey()) && !env.getProcedure(procedureCalled).hasParameter(entry.getKey()))
-                env.setVariable(entry.getKey(), entry.getValue());
+            if (env.hasVariable(entry.getKey()) && !env.getProcedure(procedureCalled).hasParameter(entry.getKey())){
+                env.setVariable(entry.getKey(), entry.getValue());}
     }
 
     @Override
     public Object evaluate(Environment e)
     {
+        exec(e);
         return e.getVariable(procedureCalled);
     }
 

@@ -24,7 +24,6 @@ public class Parser
     private final Scanner scanner;
     private String currentToken;
     public Environment currentEnvironment;
-    public ArrayList<ProcedureDeclaration> procedures;
 
     /**
      * Used to test
@@ -90,17 +89,21 @@ public class Parser
      *
      * @throws ScanErrorException If the scanner encounters an error.
      */
-    public void run() throws ScanErrorException
+    public Program parseProgram() throws ScanErrorException
     {
-        procedures = new ArrayList<>();
+        ArrayList<ProcedureDeclaration> procedures = new ArrayList<>();
         ArrayList<Statement> a = new ArrayList<>();
         while (scanner.hasNext())
             if (currentToken.compareTo("PROCEDURE") == 0)
                 procedures.add(parseDeclaration());
             else
                 a.add(parseStatement());
-        System.out.println(a);
-        (new Block(a)).exec(currentEnvironment);
+        return new Program(new Block(a), new Environment(procedures));
+    }
+
+    public void run() throws ScanErrorException
+    {
+        parseProgram().exec(new Environment());
     }
 
     private ProcedureDeclaration parseDeclaration() throws ScanErrorException
@@ -117,7 +120,7 @@ public class Parser
                 eat(")");
                 break;
             }
-            else if(currentToken.compareTo(",") == 0)
+            else if (currentToken.compareTo(",") == 0)
             {
                 eat(",");
             }
@@ -217,7 +220,7 @@ public class Parser
     /**
      * Handles conditional statements
      *
-     * @return the conditional with everyting evaluated
+     * @return the conditional with everything evaluated
      * @throws ScanErrorException if there is an error scanning
      */
     private Expression parseConditional() throws ScanErrorException
@@ -337,34 +340,26 @@ public class Parser
         eat(currentToken);
         if (Objects.equals(currentToken, "("))
         {
-            for (ProcedureDeclaration procedure : procedures)
+            eat("(");
+            ArrayList<Expression> b = new ArrayList<>();
+            for (; ; )
             {
-                if (procedure.getName().compareTo(a) == 0)
+                if (currentToken.compareTo(")") == 0)
                 {
-                    eat("(");
-                    ArrayList<Expression> b = new ArrayList<>();
-                    for (; ; )
-                    {
-                        if (currentToken.compareTo(")") == 0)
-                        {
-                            eat(")");
-                            break;
-                        }
-                        else if(currentToken.compareTo(",") == 0)
-                        {
-                            eat(",");
-                        }
-                        else
-                        {
-                            b.add(parseExpression());
-                            eat(currentToken);
-                        }
-                    }
-                    return new ProcedureCall(procedure.getName(), b.toArray(Expression[]::new));
+                    eat(")");
+                    break;
+                }
+                else if (currentToken.compareTo(",") == 0)
+                {
+                    eat(",");
+                }
+                else
+                {
+                    b.add(parseExpression());
+                    eat(currentToken);
                 }
             }
-            //If all procedures were searched and none have the right name
-            throw new RuntimeException("Procedure " + a + " not found");
+            return new ProcedureCall(a, b.toArray(Expression[]::new));
         }
         else
             return new Variable(a);

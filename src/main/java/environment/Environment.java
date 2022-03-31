@@ -3,6 +3,7 @@ package environment;
 import ast.ProcedureDeclaration;
 import ast.Statement;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Environment implements Cloneable
@@ -11,26 +12,43 @@ public class Environment implements Cloneable
     public HashMap<String, ProcedureDeclaration> allProcedures;
     public Environment parent;
 
-    public Environment(HashMap<String, Object> a, HashMap<String, ProcedureDeclaration> b)
+    public Environment(HashMap<String, Object> newVars,
+                       HashMap<String, ProcedureDeclaration> newProcedures)
     {
-        this.allVars = a;
-        this.setAllProcedures(b);
+        this.allVars = newVars;
+        this.setAllProcedures(newProcedures);
+    }
+
+    public Environment(
+            HashMap<String, ProcedureDeclaration> newProcedures)
+    {
+        this.allVars = new HashMap<>();
+        this.setAllProcedures(newProcedures);
     }
 
     public Environment()
     {
         this(new HashMap<>(), new HashMap<>());
     }
+
     public Environment(Environment parent)
     {
         this(new HashMap<>(), new HashMap<>());
         setParent(parent);
     }
 
-    public Environment(HashMap<String, Object> a, HashMap<String, ProcedureDeclaration> b, Environment env)
+    public Environment(HashMap<String, Object> a, HashMap<String, ProcedureDeclaration> b,
+                       Environment env)
     {
         this(a, b);
         setParent(env);
+    }
+
+    public Environment(ArrayList<ProcedureDeclaration> procedures)
+    {
+        this();
+        for (ProcedureDeclaration procedureDeclaration : procedures)
+            addProcedure(procedureDeclaration.getName(), procedureDeclaration);
     }
 
     private void setParent(Environment parent)
@@ -88,6 +106,14 @@ public class Environment implements Cloneable
         return allVars;
     }
 
+    public Environment Global()
+    {
+        if (parent == null)
+            return this;
+        else
+            return parent.Global();
+    }
+
     @Override
     public String toString()
     {
@@ -102,7 +128,8 @@ public class Environment implements Cloneable
     @Override
     public Environment clone()
     {
-        return new Environment(new HashMap<>(getAllVars()), new HashMap<>(getAllProcedures()), this);
+        return new Environment(new HashMap<>(getAllVars()), new HashMap<>(getAllProcedures()),
+                this);
     }
 
     public ProcedureDeclaration getProcedure(String procedureCalled)
