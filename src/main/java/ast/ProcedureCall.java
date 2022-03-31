@@ -4,6 +4,7 @@ import environment.Environment;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class ProcedureCall implements Statement, Expression
 {
@@ -25,17 +26,22 @@ public class ProcedureCall implements Statement, Expression
     @Override
     public void exec(@NotNull Environment env)
     {
+        Environment newEnvironment = new Environment(env);
         if (env.hasProcedure(procedureCalled))
         {
-            Environment newEnvironment = env.clone();
+            newEnvironment = env.clone();
             ProcedureDeclaration pro = env.getProcedure(procedureCalled);
-            ArrayList<Statement> statements = new ArrayList<>();
             for (int i = 0; i < pro.getParameters().length; i++)
             {
                 new Assignment(pro.getParameters()[i].getName(), arguments[i]).exec(newEnvironment);
                 pro.getStatement().exec(newEnvironment);
             }
         }
+        else
+            throw new IllegalArgumentException("Procedure " + procedureCalled + " not found");
+        for (Map.Entry<String, Object> entry : newEnvironment.getAllVars().entrySet())
+            if (env.hasVariable(entry.getKey()) && !env.getProcedure(procedureCalled).hasParameter(entry.getKey()))
+                env.setVariable(entry.getKey(), entry.getValue());
     }
 
     @Override

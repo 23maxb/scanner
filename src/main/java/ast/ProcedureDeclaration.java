@@ -2,6 +2,8 @@ package ast;
 
 import environment.Environment;
 
+import java.util.Arrays;
+
 /**
  * Represents an abstract syntax tree in a pascal program.
  *
@@ -92,5 +94,10 @@ public class ProcedureDeclaration
     {
         currentEnvironment.addProcedure(name, this);
 
+    }
+
+    public boolean hasParameter(String key)
+    {
+        return Arrays.stream(parameters).anyMatch(parameter -> parameter.getName().equals(key));
     }
 }

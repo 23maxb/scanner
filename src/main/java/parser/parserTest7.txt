@@ -20,6 +20,8 @@ BEGIN
 		WRITELN(x);
 		x := x + 1;
 	END;
+	WRITELN(100);
+	WRITELN(x);
 	ignore := Add();
 	WRITELN(x);
 	
