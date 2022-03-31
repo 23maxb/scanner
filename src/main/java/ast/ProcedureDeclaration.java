@@ -92,8 +92,7 @@ public class ProcedureDeclaration
 
     public void exec(Environment currentEnvironment)
     {
-        currentEnvironment.addProcedure(name, this);
-
+        currentEnvironment.addProcedure(this);
     }
 
     public boolean hasParameter(String key)

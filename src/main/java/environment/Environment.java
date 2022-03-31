@@ -8,35 +8,28 @@ import java.util.HashMap;
 public class Environment implements Cloneable
 {
     public HashMap<String, Object> allVars;
-    public HashMap<String, ProcedureDeclaration> allProcedures;
+    public ArrayList<ProcedureDeclaration> allProcedures;
     public Environment parent;
 
     public Environment(HashMap<String, Object> newVars,
-                       HashMap<String, ProcedureDeclaration> newProcedures)
+                       ArrayList<ProcedureDeclaration> newProcedures)
     {
         this.allVars = newVars;
         this.setAllProcedures(newProcedures);
     }
 
-    public Environment(
-            HashMap<String, ProcedureDeclaration> newProcedures)
-    {
-        this.allVars = new HashMap<>();
-        this.setAllProcedures(newProcedures);
-    }
-
     public Environment()
     {
-        this(new HashMap<>(), new HashMap<>());
+        this(new HashMap<>(), new ArrayList<>());
     }
 
     public Environment(Environment parent)
     {
-        this(new HashMap<>(), new HashMap<>());
+        this(new HashMap<>(), new ArrayList<>());
         setParent(parent);
     }
 
-    public Environment(HashMap<String, Object> a, HashMap<String, ProcedureDeclaration> b,
+    public Environment(HashMap<String, Object> a, ArrayList<ProcedureDeclaration> b,
                        Environment env)
     {
         this(a, b);
@@ -46,8 +39,7 @@ public class Environment implements Cloneable
     public Environment(ArrayList<ProcedureDeclaration> procedures)
     {
         this();
-        for (ProcedureDeclaration procedureDeclaration : procedures)
-            addProcedure(procedureDeclaration.getName(), procedureDeclaration);
+        setAllProcedures(procedures);
     }
 
     private void setParent(Environment parent)
@@ -85,19 +77,19 @@ public class Environment implements Cloneable
         this.allVars = allVars;
     }
 
-    public HashMap<String, ProcedureDeclaration> getAllProcedures()
+    public ArrayList<ProcedureDeclaration> getAllProcedures()
     {
         return allProcedures;
     }
 
-    public void setAllProcedures(HashMap<String, ProcedureDeclaration> allProcedures)
+    public void setAllProcedures(ArrayList<ProcedureDeclaration> allProcedures)
     {
         this.allProcedures = allProcedures;
     }
 
-    public void addProcedure(String name, ProcedureDeclaration procedureDeclaration)
+    public void addProcedure(ProcedureDeclaration procedureDeclaration)
     {
-        allProcedures.put(name, procedureDeclaration);
+        allProcedures.add(procedureDeclaration);
     }
 
     public HashMap<String, Object> getAllVars()
@@ -121,18 +113,32 @@ public class Environment implements Cloneable
 
     public boolean hasProcedure(String procedureCalled)
     {
-        return getAllProcedures().containsKey(procedureCalled);
+        try
+        {
+            getProcedure(procedureCalled);
+        }
+        catch (IllegalArgumentException e)
+        {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public Environment clone()
     {
-        return new Environment(new HashMap<>(getAllVars()), new HashMap<>(getAllProcedures()),
+        return new Environment(new HashMap<>(getAllVars()),
+                (ArrayList<ProcedureDeclaration>) getAllProcedures().clone(),
                 this);
     }
 
     public ProcedureDeclaration getProcedure(String procedureCalled)
     {
-        return getAllProcedures().get(procedureCalled);
+        for (int i = 0; i < getAllProcedures().size(); i++)
+        {
+            if (getAllProcedures().get(i).getName().equals(procedureCalled))
+                return getAllProcedures().get(i);
+        }
+        throw new IllegalArgumentException("No procedure with name " + procedureCalled + " found.");
     }
 }
