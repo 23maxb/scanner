@@ -1,7 +1,6 @@
 package environment;
 
 import ast.ProcedureDeclaration;
-import ast.Statement;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -106,12 +105,12 @@ public class Environment implements Cloneable
         return allVars;
     }
 
-    public Environment Global()
+    public Environment global()
     {
         if (parent == null)
             return this;
         else
-            return parent.Global();
+            return parent.global();
     }
 
     @Override

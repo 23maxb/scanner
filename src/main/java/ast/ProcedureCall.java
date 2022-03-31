@@ -3,7 +3,6 @@ package ast;
 import environment.Environment;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
 
@@ -28,7 +27,7 @@ public class ProcedureCall implements Statement, Expression
     public void exec(@NotNull Environment env)
     {
         System.out.println("all procedures:"  );
-        System.out.println(env.getAllProcedures());
+        System.out.println(env.global().getAllProcedures());
         Environment newEnvironment;
         if (env.hasProcedure(procedureCalled))
         {
