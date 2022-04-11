@@ -16,12 +16,12 @@ public interface Statement
      *
      * @param env
      */
-    public abstract void exec(Environment env);
+    void exec(Environment env);
 
     /**
      * Returns a string representation of the object
      * @return a string representation of the object
      */
     @Override
-    public abstract String toString();
+    String toString();
 }
