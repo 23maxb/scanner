@@ -3,6 +3,8 @@ package parser;
 import ast.*;
 import ast.Number;
 import environment.Environment;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import scanner.ScanErrorException;
 import scanner.Scanner;
 
@@ -106,7 +108,9 @@ public class Parser
         parseProgram().exec(new Environment());
     }
 
-    private ProcedureDeclaration parseDeclaration() throws ScanErrorException
+    @Contract(" -> new")
+    private @NotNull
+    ProcedureDeclaration parseDeclaration() throws ScanErrorException
     {
         eat("PROCEDURE");
         String methodName = currentToken;

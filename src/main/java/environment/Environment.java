@@ -141,4 +141,9 @@ public class Environment implements Cloneable
         }
         throw new IllegalArgumentException("No procedure with name " + procedureCalled + " found.");
     }
+
+    public void setGlobalEnvironment(Environment globalEnvironment)
+    {
+        this.parent = globalEnvironment;
+    }
 }

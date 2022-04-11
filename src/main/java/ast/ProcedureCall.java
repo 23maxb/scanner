@@ -26,12 +26,10 @@ public class ProcedureCall implements Statement, Expression
     @Override
     public void exec(@NotNull Environment env)
     {
-        System.out.println("all procedures:"  );
-        System.out.println(env.global().getAllProcedures());
         Environment newEnvironment;
         if (env.hasProcedure(procedureCalled))
         {
-            newEnvironment = env.clone();
+            newEnvironment = env.global().clone();
             ProcedureDeclaration pro = env.getProcedure(procedureCalled);
             for (int i = 0; i < pro.getParameters().length; i++)
             {
