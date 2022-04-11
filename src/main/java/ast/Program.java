@@ -35,6 +35,7 @@ public class Program implements Statement
     @Override
     public void exec(Environment e)
     {
+        System.out.println(toRun);
         e.setGlobalEnvironment(globalEnvironment);
         toRun.exec(e.global());
     }
