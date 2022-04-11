@@ -16,24 +16,14 @@ public interface Expression
      * @param e the enviornment to pull variable values from
      * @return the evaluated value
      */
-    public abstract Object evaluate(Environment e);
-
-    /**
-     * Evaluates the Expression
-     *
-     * @param e the enviornment to pull variable values from
-     * @return the evaluated value
-     */
-    public default Object eval(Environment e)
-    {
-        return evaluate(e);
-    }
+    Object evaluate(Environment e);
 
     /**
      * Returns a string representation of the object
      *
      * @return a string representation of the object
      */
-    public abstract String toString();
+    @Override
+    String toString();
 
 }

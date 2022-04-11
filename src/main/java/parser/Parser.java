@@ -342,7 +342,7 @@ public class Parser
         //need to check if it's a variable or a procedure call
         String a = currentToken; // a is the name of the variable or procedure
         eat(currentToken);
-        if (Objects.equals(currentToken, "("))
+        if (Objects.equals(currentToken, "(")) // true if it's a procedure call
         {
             eat("(");
             ArrayList<Expression> b = new ArrayList<>();
@@ -363,7 +363,9 @@ public class Parser
                     eat(currentToken);
                 }
             }
-            return new ProcedureCall(a, b.toArray(Expression[]::new));
+            ProcedureCall dalks = new ProcedureCall(a, b.toArray(Expression[]::new));
+            System.out.println("apple:" + dalks);
+            return dalks;
         }
         else
             return new Variable(a);
