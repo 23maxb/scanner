@@ -21,6 +21,7 @@ BEGIN
 		x := x + 1;
 	END;
 	ignore := Add();
+	WRITELN(9999999);
 	WRITELN(x);
 	
 END;
