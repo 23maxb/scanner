@@ -30,9 +30,9 @@ public class Parser
     /**
      * Used to test
      *
-     * @param args
-     * @throws ScanErrorException
-     * @throws FileNotFoundException
+     * @param args arguments ig?
+     * @throws ScanErrorException    if the file is corrupted
+     * @throws FileNotFoundException if the file is not found
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
@@ -363,9 +363,7 @@ public class Parser
                     eat(currentToken);
                 }
             }
-            ProcedureCall dalks = new ProcedureCall(a, b.toArray(Expression[]::new));
-            System.out.println("apple:" + dalks);
-            return dalks;
+            return new ProcedureCall(a, b.toArray(Expression[]::new));
         }
         else
             return new Variable(a);

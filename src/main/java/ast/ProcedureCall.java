@@ -34,14 +34,16 @@ public class ProcedureCall implements Statement, Expression
             for (int i = 0; i < pro.getParameters().length; i++)
             {
                 new Assignment(pro.getParameters()[i].getName(), arguments[i]).exec(newEnvironment);
-                pro.getStatement().exec(newEnvironment);
             }
+            pro.getStatement().exec(newEnvironment);
         }
         else
             throw new IllegalArgumentException("Procedure '" + procedureCalled + "' not found");
         for (Map.Entry<String, Object> entry : newEnvironment.getAllVars().entrySet())
-            if (env.hasVariable(entry.getKey()) && !env.getProcedure(procedureCalled).hasParameter(entry.getKey())){
-                env.setVariable(entry.getKey(), entry.getValue());}
+            if (env.hasVariable(entry.getKey()) && !env.getProcedure(procedureCalled).hasParameter(entry.getKey()))
+            {
+                env.setVariable(entry.getKey(), entry.getValue());
+            }
     }
 
     @Override
