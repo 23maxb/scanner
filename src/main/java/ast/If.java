@@ -10,8 +10,8 @@ import environment.Environment;
  */
 public class If implements Statement
 {
-    public Expression condition;
-    public Block b;
+    private final Expression condition;
+    private final Block b;
 
     /**
      * Creates a statement that can be executed if a condition is true
@@ -28,7 +28,7 @@ public class If implements Statement
     /**
      * Executes the value with the environment given in the parameter.
      *
-     * @param env the enviornment to pull variables from
+     * @param env the environment to pull variables from
      */
     @Override
     public void exec(Environment env)

@@ -25,6 +25,9 @@ public class Parser
 
     private final Scanner scanner;
     private String currentToken;
+    /**
+     * Environment to use for the parser (often just a blank environment).
+     */
     public Environment currentEnvironment;
 
     /**
@@ -88,6 +91,7 @@ public class Parser
     /**
      * Runs the program through tokens given by the scanner file.
      *
+     * @return the program that is completely parsed
      * @throws ScanErrorException If the scanner encounters an error.
      */
     public Program parseProgram() throws ScanErrorException
@@ -248,7 +252,9 @@ public class Parser
     private Expression parseConditional() throws ScanErrorException
     {
         Expression res = (parseExpression());
-        while ((currentToken.equals(">") || currentToken.equals("<") || currentToken.equals("<=") || currentToken.equals(">=") || currentToken.equals("<>")))
+        while ((currentToken.equals(">") || currentToken.equals("<")
+                || currentToken.equals("<=") || currentToken.equals(">=") || currentToken.equals(
+                "<>")))
         {
             if (currentToken.equals(">"))
             {

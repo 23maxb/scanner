@@ -64,37 +64,74 @@ public class ProcedureDeclaration
         this.statement = statement;
     }
 
+    /**
+     * Gets the name of the procedure.
+     *
+     * @return the name of the procedure
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Sets the name of the procedure
+     *
+     * @param name the new name of the procedure
+     */
     public void setName(String name)
     {
         this.name = name;
     }
 
+    /**
+     * Returns the parameter with the given name
+     *
+     * @return the parameters
+     */
     public Variable[] getParameters()
     {
         return parameters;
     }
 
+    /**
+     * Sets the parameters of the procedure.
+     *
+     * @param parameters the new parameters
+     */
     public void setParameters(Variable[] parameters)
     {
         this.parameters = parameters;
     }
 
+    /**
+     * Returns a string representation of the procedure declaration.
+     *
+     * @return a string representation of the procedure declaration.
+     */
     @Override
     public String toString()
     {
         return "Method: (" + name + "," + statement + ")";
     }
 
+    /**
+     * Executes the procedure.
+     *
+     * @param currentEnvironment the current environment
+     */
     public void exec(Environment currentEnvironment)
     {
         currentEnvironment.addProcedure(this);
     }
 
+    /**
+     * Returns the parameters as a string.
+     *
+     * @param key the parameter to check
+     * @return true if the parameter is in the list
+     * otherwise false
+     */
     public boolean hasParameter(String key)
     {
         return Arrays.stream(parameters).anyMatch(parameter -> parameter.getName().equals(key));

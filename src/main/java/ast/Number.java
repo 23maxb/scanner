@@ -10,7 +10,7 @@ import environment.Environment;
  */
 public class Number implements Expression
 {
-    public int number;
+    private final int number;
 
     /**
      * Creates an integer as a number object.
