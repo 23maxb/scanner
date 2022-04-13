@@ -11,8 +11,8 @@ import environment.Environment;
  */
 public class Program implements Statement
 {
-    public Statement toRun;
-    public Environment globalEnvironment;
+    private final Statement toRun;
+    private final Environment globalEnvironment;
 
 
     /**
