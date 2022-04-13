@@ -36,9 +36,8 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest.txt");
+        run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest8.txt");
     }
-    //hi there lol
 
     /**
      * Creates a new parser that can be used to run whatever file is passed
@@ -109,11 +108,23 @@ public class Parser
         return new Program(new Block(a), new Environment(procedures));
     }
 
+    /**
+     * Parses the program from the linked scanner and then runs it in a completely blank
+     * environment.
+     *
+     * @throws ScanErrorException If the scanner encounters an error.
+     */
     public void run() throws ScanErrorException
     {
         parseProgram().exec(new Environment());
     }
 
+    /**
+     * Parses a declaration from the scanner.
+     *
+     * @return the parsed declaration
+     * @throws ScanErrorException if the scanner encounters an error
+     */
     @Contract(" -> new")
     private @NotNull
     ProcedureDeclaration parseDeclaration() throws ScanErrorException

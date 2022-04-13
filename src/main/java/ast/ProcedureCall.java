@@ -6,26 +6,51 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Map;
 
+/**
+ * A procedure call. Represents a procedure call in the AST.
+ *
+ * @author Max Blennemann
+ * @version 4/13/22
+ */
 public class ProcedureCall implements Statement, Expression
 {
 
     private final String procedureCalled;
     private final Expression[] arguments;
 
+    /**
+     * Creates a new procedure call.
+     *
+     * @param procedureCalled The name of the procedure called
+     * @param arguments       The arguments of the procedure call
+     */
     public ProcedureCall(String procedureCalled, Expression[] arguments)
     {
         this.procedureCalled = procedureCalled;
         this.arguments = arguments;
     }
 
+    /**
+     * Gets the procedure called.
+     *
+     * @return the procedure called
+     */
     public String getProcedureCalled()
     {
         return procedureCalled;
     }
 
+    /**
+     * Executes the procedure call.
+     *
+     * @param env the environment in which the statement is executed
+     */
     @Override
     public void exec(@NotNull Environment env)
     {
+        Object[] args =
+                Arrays.stream(arguments).map(expression -> expression.evaluate(env)).toArray();
+        System.out.println(Arrays.toString(args));
         Environment newEnvironment;
         if (env.hasProcedure(procedureCalled))
         {
@@ -33,7 +58,7 @@ public class ProcedureCall implements Statement, Expression
             ProcedureDeclaration pro = env.getProcedure(procedureCalled);
             for (int i = 0; i < pro.getParameters().length; i++)
             {
-                new Assignment(pro.getParameters()[i].getName(), arguments[i]).exec(newEnvironment);
+                newEnvironment.getAllVars().put(pro.getParameters()[i].getName(), args[i]);
             }
             pro.getStatement().exec(newEnvironment);
         }
@@ -46,6 +71,12 @@ public class ProcedureCall implements Statement, Expression
             }
     }
 
+    /**
+     * Evaluates the variable from the given environment.
+     *
+     * @param e the enviornment to pull variable values from
+     * @return  the value of the variable
+     */
     @Override
     public Object evaluate(Environment e)
     {
