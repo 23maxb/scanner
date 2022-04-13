@@ -36,7 +36,7 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest8.txt");
+        run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest.txt");
     }
 
     /**
@@ -95,10 +95,16 @@ public class Parser
         ArrayList<ProcedureDeclaration> procedures = new ArrayList<>();
         ArrayList<Statement> a = new ArrayList<>();
         while (scanner.hasNext())
+        {
             if (currentToken.compareTo("PROCEDURE") == 0)
+            {
                 procedures.add(parseDeclaration());
+            }
             else
+            {
                 a.add(parseStatement());
+            }
+        }
         return new Program(new Block(a), new Environment(procedures));
     }
 
@@ -217,6 +223,7 @@ public class Parser
         eat(":=");
         Statement toReturn = new Assignment(varName, parseExpression());
         eat(";");
+
         return toReturn;
     }
 
@@ -268,7 +275,6 @@ public class Parser
      */
     private Expression parseExpression() throws ScanErrorException
     {
-
         Expression res = (parseTerm());
         while ((currentToken.equals("+") || currentToken.equals("-")))
         {
@@ -359,7 +365,8 @@ public class Parser
                 else
                 {
                     b.add(parseExpression());
-                    eat(currentToken);
+                    if (currentToken.compareTo(")") != 0)
+                        eat(currentToken);
                 }
             }
             return new ProcedureCall(a, b.toArray(Expression[]::new));

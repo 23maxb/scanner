@@ -53,6 +53,11 @@ public class ProcedureCall implements Statement, Expression
         return e.getVariable(procedureCalled);
     }
 
+    /**
+     * Returns a string representation of the procedure call.
+     *
+     * @return a string representation of the procedure call.
+     */
     @Override
     public String toString()
     {

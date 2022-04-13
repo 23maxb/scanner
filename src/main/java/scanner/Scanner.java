@@ -252,7 +252,9 @@ public class Scanner
     public String nextToken() throws ScanErrorException
     {
         if (eof)
-            return "END";
+        {
+            return "EOF";
+        }
         while (isWhiteSpace(currentChar))
             eat(currentChar);
         if (hasNext())
