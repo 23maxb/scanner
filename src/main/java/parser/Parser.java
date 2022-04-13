@@ -38,6 +38,7 @@ public class Parser
     {
         run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest.txt");
     }
+    //hi there lol
 
     /**
      * Creates a new parser that can be used to run whatever file is passed
