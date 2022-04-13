@@ -36,7 +36,7 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest7.txt");
+        run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest8.txt");
     }
 
     /**
@@ -61,7 +61,6 @@ public class Parser
      */
     private String eat(String expected) throws ScanErrorException
     {
-        String a = currentToken;
         if (currentToken.equals(expected))
         {
             //double declaration needed to reassign currentToken DO NOT DELETE
