@@ -13,7 +13,7 @@ public interface Expression
     /**
      * Evaluates the Expression
      *
-     * @param e the enviornment to pull variable values from
+     * @param e the environment to pull variable values from
      * @return the evaluated value
      */
     Object evaluate(Environment e);

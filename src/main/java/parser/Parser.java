@@ -66,7 +66,7 @@ public class Parser
     {
         if (currentToken.equals(expected))
         {
-            //double declaration needed to reassign currentToken DO NOT DELETE
+            //double declaration needed to reassign currentToken DO NOT MERGE!!!!
             currentToken = scanner.nextToken().replace(" ", "");
             return currentToken;
         }
@@ -99,16 +99,10 @@ public class Parser
         ArrayList<ProcedureDeclaration> procedures = new ArrayList<>();
         ArrayList<Statement> a = new ArrayList<>();
         while (scanner.hasNext())
-        {
             if (currentToken.compareTo("PROCEDURE") == 0)
-            {
                 procedures.add(parseDeclaration());
-            }
             else
-            {
                 a.add(parseStatement());
-            }
-        }
         return new Program(new Block(a), new Environment(procedures));
     }
 
@@ -139,22 +133,18 @@ public class Parser
         eat("(");
         ArrayList<Variable> parameters = new ArrayList<>();
         for (; ; )
-        {
             if (currentToken.compareTo(")") == 0)
             {
                 eat(")");
                 break;
             }
             else if (currentToken.compareTo(",") == 0)
-            {
                 eat(",");
-            }
             else
             {
                 parameters.add(new Variable(currentToken));
                 eat(currentToken);
             }
-        }
         eat(";");
         return new ProcedureDeclaration(methodName, parseStatement(),
                 parameters.toArray(Variable[]::new));
@@ -204,9 +194,7 @@ public class Parser
             ArrayList<Statement> b = new ArrayList<>();
             eat("BEGIN");
             while (currentToken.compareTo("END") != 0)
-            {
                 b.add(parseStatement());
-            }
             eat("END");
             eat(";");
             return new Block(b);
@@ -295,7 +283,6 @@ public class Parser
     {
         Expression res = (parseTerm());
         while ((currentToken.equals("+") || currentToken.equals("-")))
-        {
             if (currentToken.equals("+"))
             {
                 eat("+");
@@ -306,7 +293,6 @@ public class Parser
                 eat("-");
                 res = new BinOp(res, "-", parseTerm());
             }
-        }
         return res;
     }
 
@@ -320,7 +306,6 @@ public class Parser
     {
         Expression res = parseFactor();
         while (currentToken.equals("*") || currentToken.equals("/"))
-        {
             if (currentToken.equals("*"))
             {
                 eat("*");
@@ -331,7 +316,6 @@ public class Parser
                 eat("/");
                 res = new BinOp(res, "/", parseFactor());
             }
-        }
         return res;
     }
 

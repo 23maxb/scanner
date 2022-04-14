@@ -10,7 +10,7 @@ import environment.Environment;
  */
 public class Writeln implements Statement
 {
-    private Expression exp;
+    private final Expression exp;
 
     /**
      * Creates the writeln object.

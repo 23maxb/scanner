@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class Block implements Statement
 {
-    private List<Statement> statements;
+    private final List<Statement> statements;
 
     /**
      * Creates a block from a list of statements
