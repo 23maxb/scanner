@@ -301,6 +301,8 @@ public class Parser
      *
      * @return the value that the program gets
      * @throws ScanErrorException if there is an error scanning
+     * @precondition the expression is ready to be parsed
+     * @postcondition the expression has been parsed
      */
     private Expression parseExpression() throws ScanErrorException
     {
@@ -324,6 +326,8 @@ public class Parser
      *
      * @return the value of the parsed term
      * @throws ScanErrorException if an error is encountered with the scanner
+     * @precondition the term is ready to be parsed
+     * @postcondition the term has been parsed
      */
     private Expression parseTerm() throws ScanErrorException
     {
@@ -345,6 +349,8 @@ public class Parser
     /**
      * Handles parenthesis and subtracting and regular integers and variables
      *
+     * @precondition the factor is ready to be parsed
+     * @postcondition the factor has been parsed
      * @return the value
      * @throws ScanErrorException if the end of file is reached
      */
@@ -403,6 +409,8 @@ public class Parser
     /**
      * Returns true if the given string is an integer
      *
+     * @precondition the string is not null
+     * @postcondition the string has been checked
      * @param a the string to check
      * @return true if the given string can be parsed
      * otherwise false
