@@ -39,7 +39,7 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest8.txt");
+        run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest7.txt");
     }
 
     /**
@@ -47,6 +47,8 @@ public class Parser
      *
      * @param s the scanner to use
      * @throws ScanErrorException if the scanner encounters an error
+     * @precondition scanner is not null
+     * @postcondition parser has scanner completely set up
      */
     public Parser(Scanner s) throws ScanErrorException
     {
@@ -61,7 +63,10 @@ public class Parser
      * @param expected the expected token
      * @return the thing that was eaten
      * @throws ScanErrorException if the scanner reaches end of file or similar error.
+     * @precondition currentToken is not null
+     * @postcondition currentToken is eaten if it matches expected
      */
+    @SuppressWarnings("UnusedReturnValue")
     private String eat(String expected) throws ScanErrorException
     {
         if (currentToken.equals(expected))
@@ -82,6 +87,8 @@ public class Parser
      * @param path The path to look at
      * @throws FileNotFoundException If the file is not found
      * @throws ScanErrorException    if an error is encountered with scanning (end of file usually)
+     * @precondition the file exists
+     * @postcondition the file is run and the result is printed
      */
     public static void run(String path) throws FileNotFoundException, ScanErrorException
     {
@@ -93,6 +100,8 @@ public class Parser
      *
      * @return the program that is completely parsed
      * @throws ScanErrorException If the scanner encounters an error.
+     * @precondition scanner has a file loaded correctly
+     * @postcondition there is a new program object created
      */
     public Program parseProgram() throws ScanErrorException
     {
@@ -111,6 +120,8 @@ public class Parser
      * environment.
      *
      * @throws ScanErrorException If the scanner encounters an error.
+     * @precondition scanner has a file loaded correctly
+     * @postcondition the program is run
      */
     public void run() throws ScanErrorException
     {
@@ -122,6 +133,8 @@ public class Parser
      *
      * @return the parsed declaration
      * @throws ScanErrorException if the scanner encounters an error
+     * @precondition scanner has a file loaded correctly
+     * @postcondition the declaration is parsed and loaded into the environment
      */
     @Contract(" -> new")
     private @NotNull
@@ -154,6 +167,8 @@ public class Parser
      * Lists all the tokens in order for debugging
      *
      * @throws ScanErrorException if the scanner gets an error (this will not happen)
+     * @precondition scanner has a file loaded correctly
+     * @postcondition the tokens are printed
      */
     public void allTokens() throws ScanErrorException
     {
@@ -167,6 +182,9 @@ public class Parser
      * post condition: number token has been eaten
      *
      * @return the value of the parsed integer
+     * @precondition scanner has a file loaded correctly
+     * @postcondition the number has been parsed
+     * @deprecated use {@link #parseExpression()} instead
      */
     private int parseNumber() throws ScanErrorException
     {
@@ -177,6 +195,9 @@ public class Parser
 
     /**
      * Parses a statement such as WRITELN or setting variable value.
+     *
+     * @precondition the scanner is at a statement
+     * @postcondition the statement has been parsed
      */
     private Statement parseStatement() throws ScanErrorException
     {
@@ -236,6 +257,8 @@ public class Parser
      *
      * @return the conditional with everything evaluated
      * @throws ScanErrorException if there is an error scanning
+     * @precondition the conditional is ready to be parsed
+     * @postcondition the conditional has been parsed
      */
     private Expression parseConditional() throws ScanErrorException
     {

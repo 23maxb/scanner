@@ -23,11 +23,9 @@ BEGIN
 		x := x + 1;
 	END;
 	WRITELN(y);
-	WRITELN(988888);
-	WRITELN(y);
-	WRITELN(988888);
 	ignore := Add(4,x,y);
 	WRITELN(x);
+
 END;
 .
 .

@@ -50,7 +50,6 @@ public class ProcedureCall implements Statement, Expression
     {
         Object[] args =
                 Arrays.stream(arguments).map(expression -> expression.evaluate(env)).toArray();
-        System.out.println(Arrays.toString(args));
         Environment newEnvironment;
         if (env.hasProcedure(procedureCalled))
         {
