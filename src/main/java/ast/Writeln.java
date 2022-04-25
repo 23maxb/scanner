@@ -52,7 +52,9 @@ public class Writeln implements Statement
     @Override
     public void compile(Emitter e)
     {
-        e.emit("");
+        e.emit("li $v0, 1");
+        exp.compile(e);
+        e.emit("move $a0, $v0");
     }
 }
 

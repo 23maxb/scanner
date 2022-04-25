@@ -57,5 +57,17 @@ public class Variable implements Expression
         return "Variable(" + name + ")";
     }
 
+    /**
+     * Returns the required assembly code to evaluate the expression.
+     *
+     * @param e the emitter to use
+     */
+    @Override
+    public void compile(Emitter e)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+        //TODO: implement and figure out how .data factors in
+    }
+
 
 }
