@@ -43,6 +43,17 @@ public class Writeln implements Statement
     {
         return "WRITELN(" + exp.toString() + ")";
     }
+
+    /**
+     * Returns the required assembly code to print the expression.
+     *
+     * @param e the emitter to use
+     */
+    @Override
+    public void compile(Emitter e)
+    {
+        e.emit("");
+    }
 }
 
 

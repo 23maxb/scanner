@@ -47,4 +47,15 @@ public class Number implements Expression
     {
         return "Number(" + number + ")";
     }
+
+    /**
+     * Returns the required assembly code to allocate the number to $t0.
+     *
+     * @param e the emitter to use
+     */
+    @Override
+    public void compile(Emitter e)
+    {
+        e.emit("li $t0, " + number);
+    }
 }
