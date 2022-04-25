@@ -44,6 +44,8 @@ public class ProcedureCall implements Statement, Expression
      * Executes the procedure call.
      *
      * @param env the environment in which the statement is executed
+     * @precondition e != null
+     * @postcondition the code has been executed and the variables have been updated
      */
     @Override
     public void exec(@NotNull Environment env)
@@ -64,7 +66,8 @@ public class ProcedureCall implements Statement, Expression
         else
             throw new IllegalArgumentException("Procedure '" + procedureCalled + "' not found");
         for (Map.Entry<String, Object> entry : newEnvironment.getAllVars().entrySet())
-            if (env.hasVariable(entry.getKey()) && !env.getProcedure(procedureCalled).hasParameter(entry.getKey()))
+            if (env.hasVariable(entry.getKey())
+                    && !env.getProcedure(procedureCalled).hasParameter(entry.getKey()))
             {
                 env.setVariable(entry.getKey(), entry.getValue());
             }
@@ -73,8 +76,10 @@ public class ProcedureCall implements Statement, Expression
     /**
      * Evaluates the variable from the given environment.
      *
-     * @param e the enviornment to pull variable values from
-     * @return  the value of the variable
+     * @param e the environment to pull variable values from
+     * @return the value of the variable
+     * @precondition e != null
+     * @postcondition the variable has been evaluated and the code has been run
      */
     @Override
     public Object evaluate(Environment e)

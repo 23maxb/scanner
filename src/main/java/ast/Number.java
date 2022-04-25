@@ -26,6 +26,8 @@ public class Number implements Expression
      * Evaluates the number.
      * (Just returns the integer.)
      *
+     * @precondition none
+     * @postcondition none
      * @param e the enviornment to pull variable values from
      * @return the number object
      */

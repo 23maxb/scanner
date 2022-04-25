@@ -10,7 +10,7 @@ import java.util.Arrays;
  * @author Max Blennemann
  * @author 3/25/22
  */
-public class ProcedureDeclaration
+public class ProcedureDeclaration implements Statement
 {
     public Statement statement;
     public String name;

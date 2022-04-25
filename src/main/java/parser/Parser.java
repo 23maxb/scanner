@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import scanner.ScanErrorException;
 import scanner.Scanner;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest7.txt");
+        run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest8.txt");
     }
 
     /**
@@ -349,10 +348,10 @@ public class Parser
     /**
      * Handles parenthesis and subtracting and regular integers and variables
      *
-     * @precondition the factor is ready to be parsed
-     * @postcondition the factor has been parsed
      * @return the value
      * @throws ScanErrorException if the end of file is reached
+     * @precondition the factor is ready to be parsed
+     * @postcondition the factor has been parsed
      */
     private Expression parseFactor() throws ScanErrorException
     {
@@ -409,11 +408,11 @@ public class Parser
     /**
      * Returns true if the given string is an integer
      *
-     * @precondition the string is not null
-     * @postcondition the string has been checked
      * @param a the string to check
      * @return true if the given string can be parsed
      * otherwise false
+     * @precondition the string is not null
+     * @postcondition the string has been checked
      */
     private static boolean isInteger(String a)
     {
