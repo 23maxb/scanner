@@ -1,5 +1,6 @@
 package ast;
 
+import emitter.Emitter;
 import environment.Environment;
 
 /**
@@ -79,5 +80,43 @@ public class BinOp implements Expression
     public String toString()
     {
         return "BinaryOperator(" + val1 + " " + operator + " " + val2 + ")";
+    }
+
+    /**
+     * Returns the required assembly code to evaluate the expression.
+     *
+     * @param e the emitter to use
+     */
+    @Override
+    public void compile(Emitter e)
+    {
+        val1.compile(e);
+        e.emit("move $t1, $t0");
+        val2.compile(e);
+        e.emit("move $t2, $t0");
+        switch (operator)
+        {
+            case "+" -> e.emit("add $t0, $t1, $t2");
+            case "-" -> e.emit("sub $t0, $t1, $t2");
+            case "/" -> e.emit("div $t0, $t1, $t2");
+            case "*" -> {
+                e.emit("mult $t1, $t2");
+                e.emit("mflo $t0");
+            }
+            case "%", "MOD" -> e.emit("rem $t0, $t1, $t2");
+            case ">" -> e.emit("bgt $t0, $t1, $t2");
+        }
+
+    }
+
+    /**
+     * Returns true if the result of the expression is a boolean.
+     * Otherwise false.
+     */
+    public boolean isBoolean()
+    {
+        return operator.equals("&&") || operator.equals("||") || operator.equals("==")
+                || operator.equals("<>") || operator.equals(">") || operator.equals("<")
+                || operator.equals(">=") || operator.equals("<=");
     }
 }

@@ -60,15 +60,13 @@ public class Variable implements Expression
 
     /**
      * Returns the required assembly code to evaluate the expression.
+     * Calling this will set $t0 to the variable value in the code.
      *
      * @param e the emitter to use
      */
     @Override
     public void compile(Emitter e)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
-        //TODO: implement and figure out how .data factors in
+        e.emit("lw $t0, var" + name);
     }
-
-
 }
