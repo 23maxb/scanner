@@ -1,5 +1,6 @@
 package ast;
 
+import emitter.Emitter;
 import environment.Environment;
 
 /**
@@ -55,6 +56,11 @@ public class Writeln implements Statement
         e.emit("li $v0, 1");
         exp.compile(e);
         e.emit("move $a0, $v0");
+        e.emit("syscall");
+        //next need to print out a new line
+        e.emit("li $a0 '\\n'");
+        e.emit("li $v0 11");
+        e.emit("syscall");
     }
 }
 

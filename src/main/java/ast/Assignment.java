@@ -1,5 +1,6 @@
 package ast;
 
+import emitter.Emitter;
 import environment.Environment;
 
 /**
@@ -86,5 +87,17 @@ public class Assignment implements Statement
     public String toString()
     {
         return "Assignment(" + variableName + " to " + value.toString() + ")";
+    }
+
+    /**
+     * Returns the required assembly code to run the Statement.
+     *
+     * @param e the emitter to use
+     */
+    @Override
+    public void compile(Emitter e)
+    {
+        value.compile(e);
+        e.emit("sw $v0 var" + variableName);
     }
 }

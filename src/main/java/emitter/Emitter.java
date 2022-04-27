@@ -1,10 +1,19 @@
-package ast;
+package emitter;
 
-import java.io.*;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+/**
+ * Emitter class. This class is responsible for emitting the code to a file.
+ *
+ * @author Max Blennemann
+ * @version 4/27/22
+ */
 public class Emitter
 {
-    private PrintWriter out;
+    private final PrintWriter out;
 
     //creates an emitter for writing to a new file with given name
     public Emitter(String outputFileName)
