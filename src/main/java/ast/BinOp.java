@@ -86,6 +86,7 @@ public class BinOp implements Expression
      * Returns the required assembly code to evaluate the expression.
      *
      * @param e the emitter to use
+     * @postcondition $t0 contains the result of the expression
      */
     @Override
     public void compile(Emitter e)
@@ -110,7 +111,6 @@ public class BinOp implements Expression
                 e.emit("div $t1, $t2");
                 e.emit("mfhi $t0");
             }
-            //fix everything below this
             case ">" -> {
                 e.emit("li $t0, 1");
                 e.emit("bgt $t1, $t2, a");
