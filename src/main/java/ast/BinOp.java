@@ -98,15 +98,76 @@ public class BinOp implements Expression
         {
             case "+" -> e.emit("add $t0, $t1, $t2");
             case "-" -> e.emit("sub $t0, $t1, $t2");
-            case "/" -> e.emit("div $t0, $t1, $t2");
+            case "/" -> {
+                e.emit("div $t1, $t2");
+                e.emit("mflo $t0");
+            }
             case "*" -> {
                 e.emit("mult $t1, $t2");
                 e.emit("mflo $t0");
             }
-            case "%", "MOD" -> e.emit("rem $t0, $t1, $t2");
-            case ">" -> e.emit("bgt $t0, $t1, $t2");
+            case "%", "MOD" -> {
+                e.emit("div $t1, $t2");
+                e.emit("mfhi $t0");
+            }
+            //fix everything below this
+            case ">" -> {
+                e.emit("li $t0, 1");
+                e.emit("bgt $t1, $t2, a");
+                e.emit("li $t0, 0");
+                e.emit("a:");
+            }
+            case "<" -> {
+                e.emit("li $t0, 1");
+                e.emit("blt $t1, $t2, a");
+                e.emit("li $t0, 0");
+                e.emit("a:");
+            }
+            case ">=" -> {
+                e.emit("li $t0, 1");
+                e.emit("blt $t1, $t2, a");
+                e.emit("beq $t1, $t2, a");
+                e.emit("li $t0, 0");
+                e.emit("a:");
+            }
+            case "<=" -> {
+                e.emit("li $t0, 1");
+                e.emit("bgt $t1, $t2, a");
+                e.emit("beq $t1, $t2, a");
+                e.emit("li $t0, 0");
+                e.emit("a:");
+            }
+            case "<>" -> {
+                e.emit("li $t0, 1");
+                e.emit("bne $t1, $t2, a");
+                e.emit("li $t0, 0");
+                e.emit("a:");
+            }
+            case "==" -> {
+                e.emit("li $t0, 1");
+                e.emit("beq $t1, $t2, a");
+                e.emit("li $t0, 0");
+                e.emit("a:");
+            }
+            case "&&" -> {
+                e.emit("li $t0, 0");
+                e.emit("beq $t1, 1, a");
+                e.emit("j c");
+                e.emit("a:");
+                e.emit("beq $t2, 1, b");
+                e.emit("j c");
+                e.emit("b:");
+                e.emit("li $t0, 1");
+                e.emit("c:");
+            }
+            case "||" -> {
+                e.emit("li $t0, 1");
+                e.emit("beq $t1, 1, a");
+                e.emit("beq $t2, 1, a");
+                e.emit("li $t0, 0");
+                e.emit("a:");
+            }
         }
-
     }
 
     /**
