@@ -14,15 +14,17 @@ import java.io.PrintWriter;
 public class Emitter
 {
     private final PrintWriter out;
+    private final String fileName;
 
     //creates an emitter for writing to a new file with given name
     public Emitter(String outputFileName)
     {
+        fileName = outputFileName;
         try
         {
             out = new PrintWriter(new FileWriter(outputFileName), true);
         }
-        catch(IOException e)
+        catch (IOException e)
         {
             throw new RuntimeException(e);
         }
@@ -36,9 +38,16 @@ public class Emitter
         out.println(code);
     }
 
+    public String getFileName()
+    {
+        return fileName;
+    }
+
     //closes the file.  should be called after all calls to emit.
     public void close()
     {
         out.close();
     }
+
+
 }

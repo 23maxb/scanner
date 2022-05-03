@@ -1,5 +1,6 @@
 package ast;
 
+import emitter.Emitter;
 import environment.Environment;
 
 /**
@@ -48,5 +49,23 @@ public class Program implements Statement
     public String toString()
     {
         return toRun.toString();
+    }
+
+    /**
+     * Returns the required assembly code to run the Statement.
+     *
+     * @param e the emitter to use
+     */
+    @Override
+    public void compile(Emitter e)
+    {
+        String name = e.getFileName();
+        if (name.contains(".asm"))
+            name = name.substring(0, e.getFileName().length() - 4);
+        e.emit("# Program Generated from AST lab by Max Blennemann from " + name);
+        e.emit(".text 0x00400000");
+        e.emit(".globl main");
+        e.emit("main:");
+        toRun.compile(e);
     }
 }

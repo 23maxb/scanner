@@ -2,6 +2,7 @@ package parser;
 
 import ast.*;
 import ast.Number;
+import emitter.Emitter;
 import environment.Environment;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +40,7 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        run("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest8.txt");
+        emit("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest8.txt");
     }
 
     /**
@@ -96,6 +97,22 @@ public class Parser
     }
 
     /**
+     * Parses the entire file and then creates a text document that has the mips code in it.
+     *
+     * @param path The path to look at
+     * @throws FileNotFoundException If the file is not found
+     * @throws ScanErrorException    if an error is encountered with scanning (end of file usually)
+     * @precondition the file exists
+     * @postcondition the file is run and the result is printed
+     */
+    public static void emit(String path) throws FileNotFoundException, ScanErrorException
+    {
+        new Parser(new Scanner(new FileInputStream(path))).emit();
+    }
+
+
+
+    /**
      * Runs the program through tokens given by the scanner file.
      *
      * @return the program that is completely parsed
@@ -126,6 +143,14 @@ public class Parser
     public void run() throws ScanErrorException
     {
         parseProgram().exec(new Environment());
+    }
+
+    /**
+     * Parses the program from the linked scanner and then compiles the code as a mips file.
+     */
+    public void emit() throws ScanErrorException
+    {
+        parseProgram().compile(new Emitter("output.asm"));
     }
 
     /**
