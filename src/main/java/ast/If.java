@@ -34,7 +34,8 @@ public class If implements Statement
     @Override
     public void exec(Environment env)
     {
-        if ((boolean) condition.evaluate(env))
+        if ((((int) ((Number) condition.evaluate(env)).evaluate(env)) == 1)
+                || (boolean) condition.evaluate(env))
         {
             b.exec(env);
         }
@@ -60,6 +61,11 @@ public class If implements Statement
     public void compile(Emitter e)
     {
         condition.compile(e);
-        
+        String a = e.label();
+        e.emit("beq $v0, $0, " + a);
+        b.compile(e);
+        e.emit(a + ":");
+
+
     }
 }

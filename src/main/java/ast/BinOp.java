@@ -183,6 +183,8 @@ public class BinOp implements Expression
     /**
      * Returns true if the result of the expression is a boolean.
      * Otherwise false.
+     *
+     * @return  true if the result of the expression is a boolean.
      */
     public boolean isBoolean()
     {

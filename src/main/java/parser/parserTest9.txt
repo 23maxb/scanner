@@ -12,7 +12,7 @@ BEGIN
 		WRITELN(y);
 	END;
 	BEGIN
-     	IF 14 = 14 THEN
+     	IF 1 THEN
      	BEGIN
          	IF 14 <> 14 THEN WRITELN(3);
          	IF 14 <= 14 THEN WRITELN(4);

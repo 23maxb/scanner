@@ -130,8 +130,12 @@ public class Parser
             else if (currentToken.compareTo("VAR") == 0)
             {
                 eat("VAR");
-                vars.add(currentToken);
-                eat(currentToken);
+                while (currentToken.compareTo(";") != 0)
+                    if (currentToken.compareTo(",") == 0)
+                        eat(",");
+                    else
+                        vars.add(eat(currentToken));
+                eat(";");
             }
             else
                 a.add(parseStatement());
