@@ -60,7 +60,14 @@ public class WhileLoop implements Statement
     @Override
     public void compile(Emitter e)
     {
-
+        String a = e.label();
+        String c = e.label();
+        e.emit(c + ":");
+        condition.compile(e);
+        e.emit("beq $v0, $0, " + a);
+        b.compile(e);
+        e.emit(a + ":");
+        e.emit("j " + c);
     }
 
 }

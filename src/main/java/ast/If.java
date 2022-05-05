@@ -65,7 +65,5 @@ public class If implements Statement
         e.emit("beq $v0, $0, " + a);
         b.compile(e);
         e.emit(a + ":");
-
-
     }
 }
