@@ -277,7 +277,6 @@ public class Parser
         {
             eat("RETURN");
             Expression toReturn = parseExpression();
-
         }
         // varName represents the variable name or the procedure name
         String varName = currentToken;
@@ -285,7 +284,6 @@ public class Parser
         eat(":=");
         Statement toReturn = new Assignment(varName, parseExpression());
         eat(";");
-
         return toReturn;
     }
 
@@ -441,10 +439,10 @@ public class Parser
         }
         else
             return new Variable(a);
-    }
+    }  // end of parseFactor
 
     /**
-     * Returns true if the given string is an integer
+     * Checks if the current token is an integer.
      *
      * @param a the string to check
      * @return true if the given string can be parsed
