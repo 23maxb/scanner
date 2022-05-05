@@ -262,7 +262,7 @@ public class Parser
             eat("IF");
             Expression a = parseConditional();
             eat("THEN");
-            Block b = (Block) parseStatement();
+            Statement b = parseStatement();
             return new If(a, b);
         }
         else if (currentToken.compareTo("WHILE") == 0)

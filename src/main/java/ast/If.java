@@ -12,24 +12,24 @@ import environment.Environment;
 public class If implements Statement
 {
     private final Expression condition;
-    private final Block b;
+    private final Statement b;
 
     /**
-     * Creates a statement that can be executed if a condition is true
+     * Creates a statement that can be executed if a condition is true.
      *
      * @param condition the condition to check
      * @param block     the block to run if the condition is true
      */
-    public If(Expression condition, Block block)
+    public If(Expression condition, Statement block)
     {
         this.condition = condition;
         b = block;
     }
 
     /**
-     * Executes the value with the environment given in the parameter.
+     * Executes the statement
      *
-     * @param env the environment to pull variables from
+     * @param env the environment in which the statement is executed
      */
     @Override
     public void exec(Environment env)
