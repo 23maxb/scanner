@@ -18,6 +18,21 @@ public class Environment implements Cloneable
         this.setAllProcedures(newProcedures);
     }
 
+    public Environment(HashMap<String, Object> newVars,
+                       ArrayList<ProcedureDeclaration> newProcedures, ArrayList<String> variables)
+    {
+        this(newVars, newProcedures);
+        variables.forEach(s -> allVars.put(s, 0));
+    }
+
+    public Environment(ArrayList<ProcedureDeclaration> newProcedures, ArrayList<String> variables)
+    {
+        this();
+        setAllProcedures(newProcedures);
+        variables.forEach(s -> allVars.put(s, 0));
+    }
+
+
     public Environment()
     {
         this(new HashMap<>(), new ArrayList<>());

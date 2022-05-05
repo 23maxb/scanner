@@ -112,60 +112,70 @@ public class BinOp implements Expression
                 e.emit("mfhi $t0");
             }
             case ">" -> {
+                String l = e.label();
                 e.emit("li $t0, 1");
-                e.emit("bgt $t1, $t2, a");
+                e.emit("bgt $t1, $t2, " + l);
                 e.emit("li $t0, 0");
-                e.emit("a:");
+                e.emit(l + ":");
             }
             case "<" -> {
+                String l = e.label();
                 e.emit("li $t0, 1");
-                e.emit("blt $t1, $t2, a");
+                e.emit("blt $t1, $t2, " + l);
                 e.emit("li $t0, 0");
-                e.emit("a:");
+                e.emit(l + ":");
             }
             case ">=" -> {
+                String l = e.label();
                 e.emit("li $t0, 1");
-                e.emit("blt $t1, $t2, a");
-                e.emit("beq $t1, $t2, a");
+                e.emit("blt $t1, $t2, " + l);
+                e.emit("beq $t1, $t2, " + l);
                 e.emit("li $t0, 0");
-                e.emit("a:");
+                e.emit(l + ":");
             }
             case "<=" -> {
+                String l = e.label();
                 e.emit("li $t0, 1");
-                e.emit("bgt $t1, $t2, a");
-                e.emit("beq $t1, $t2, a");
+                e.emit("bgt $t1, $t2, " + l);
+                e.emit("beq $t1, $t2, " + l);
                 e.emit("li $t0, 0");
-                e.emit("a:");
+                e.emit(l + ":");
             }
             case "<>" -> {
+                String l = e.label();
                 e.emit("li $t0, 1");
-                e.emit("bne $t1, $t2, a");
+                e.emit("bne $t1, $t2, " + l);
                 e.emit("li $t0, 0");
-                e.emit("a:");
+                e.emit(l + ":");
             }
             case "==" -> {
+                String l = e.label();
                 e.emit("li $t0, 1");
-                e.emit("beq $t1, $t2, a");
+                e.emit("beq $t1, $t2, " + l);
                 e.emit("li $t0, 0");
-                e.emit("a:");
+                e.emit(l + ":");
             }
             case "&&" -> {
+                String a = e.label();
+                String b = e.label();
+                String c = e.label();
                 e.emit("li $t0, 0");
-                e.emit("beq $t1, 1, a");
-                e.emit("j c");
-                e.emit("a:");
-                e.emit("beq $t2, 1, b");
-                e.emit("j c");
-                e.emit("b:");
+                e.emit("beq $t1, 1, " + a);
+                e.emit("j " + c);
+                e.emit(a + ":");
+                e.emit("beq $t2, 1, " + b);
+                e.emit("j " + c);
+                e.emit(b + ":");
                 e.emit("li $t0, 1");
-                e.emit("c:");
+                e.emit(c + ":");
             }
             case "||" -> {
+                String a = e.label();
                 e.emit("li $t0, 1");
-                e.emit("beq $t1, 1, a");
-                e.emit("beq $t2, 1, a");
+                e.emit("beq $t1, 1, " + a);
+                e.emit("beq $t2, 1, " + a);
                 e.emit("li $t0, 0");
-                e.emit("a:");
+                e.emit(a + ":");
             }
         }
     }

@@ -63,7 +63,7 @@ public class Program implements Statement
         if (name.contains(".asm"))
             name = name.substring(0, e.getFileName().length() - 4);
         e.emit("# Program Generated from AST lab by Max Blennemann from " + name);
-        e.emit(".text 0x00400000");
+        e.emit(".text");
         e.emit(".globl main");
         e.emit("main:");
         toRun.compile(e);

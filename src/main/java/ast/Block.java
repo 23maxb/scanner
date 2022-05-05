@@ -1,5 +1,6 @@
 package ast;
 
+import emitter.Emitter;
 import environment.Environment;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class Block implements Statement
     /**
      * Executes every item in the block
      *
-     * @param e the enviornment to get variables from
+     * @param e the environment to get variables from
      */
     @Override
     public void exec(Environment e)
@@ -45,5 +46,17 @@ public class Block implements Statement
     public String toString()
     {
         return "Block(" + statements.toString() + ")";
+    }
+
+    /**
+     * Returns the required assembly code to run the Statement.
+     *
+     * @param e the emitter to use
+     */
+    @Override
+    public void compile(Emitter e)
+    {
+        for (Statement statement : statements)
+            statement.compile(e);
     }
 }

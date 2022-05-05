@@ -49,5 +49,17 @@ public class Emitter
         out.close();
     }
 
+    private int labelCount = 0;
 
+    /**
+     * Creates a new label every time.
+     *
+     * @return a new label
+     */
+    public String label()
+    {
+        return "label" + labelCount++;
+    }
 }
+
+

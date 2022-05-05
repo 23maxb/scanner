@@ -1,5 +1,6 @@
 package ast;
 
+import emitter.Emitter;
 import environment.Environment;
 
 /**
@@ -48,5 +49,17 @@ public class If implements Statement
     public String toString()
     {
         return "IF(" + condition + " THEN: " + b + ")";
+    }
+
+    /**
+     * Returns the required assembly code to run the Statement.
+     *
+     * @param e the emitter to use
+     */
+    @Override
+    public void compile(Emitter e)
+    {
+        condition.compile(e);
+        
     }
 }
