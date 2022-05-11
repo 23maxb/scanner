@@ -68,7 +68,7 @@ public class Program implements Statement
         for (String varName : globalEnvironment.getAllVars().keySet())
         {
             e.emit("var" + varName + ":");
-            e.emit(".word 0");//TODO FIX THIS
+            e.emit(".word 0");
         }
         e.emit(".text");
         e.emit(".globl main");
