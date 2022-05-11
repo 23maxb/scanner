@@ -40,7 +40,7 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        emit("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest9.txt");
+        emit("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\hi.txt");
     }
 
     /**
@@ -134,11 +134,15 @@ public class Parser
                     if (currentToken.compareTo(",") == 0)
                         eat(",");
                     else
-                        vars.add(eat(currentToken));
+                    {
+                        vars.add(currentToken);
+                        eat(currentToken);
+                    }
                 eat(";");
             }
             else
                 a.add(parseStatement());
+        System.out.println(vars);
         return new Program(new Block(a), new Environment(procedures, vars));
     }
 

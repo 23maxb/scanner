@@ -47,6 +47,7 @@ public class Emitter
     public void close()
     {
         out.close();
+        System.out.println("Successfully finished writing to: " + fileName);
     }
 
     private int labelCount = 0;

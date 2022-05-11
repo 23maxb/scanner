@@ -1,10 +1,8 @@
+	VAR x;
+	VAR y, count;
 BEGIN
 	x := 2;
-	WRITELN(x);
-	IF x < 3 THEN
-	BEGIN
-		WRITELN(x);
-		WRITELN(5);
-	END;
+	y := x + 1;
+	WRITELN(y);
 END;
 .
