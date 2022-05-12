@@ -91,6 +91,7 @@ public class Assignment implements Statement
 
     /**
      * Returns the required assembly code to run the Statement.
+     * The code will store the compiled value into $v0.
      *
      * @param e the emitter to use
      */
@@ -98,6 +99,6 @@ public class Assignment implements Statement
     public void compile(Emitter e)
     {
         value.compile(e);
-        e.emit("sw $v0 var" + variableName);
+        e.emit("sw $t0 var" + variableName);
     }
 }

@@ -46,6 +46,7 @@ public class Emitter
     //closes the file.  should be called after all calls to emit.
     public void close()
     {
+
         out.close();
         System.out.println("Successfully finished writing to: " + fileName);
     }

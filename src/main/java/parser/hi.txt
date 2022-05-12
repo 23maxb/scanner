@@ -2,7 +2,12 @@
 	VAR y, count;
 BEGIN
 	x := 2;
-	y := x + 1;
-	WRITELN(y);
+	y := 4;
+	count := x + y;
+	count := count + 1;
+	IF count <= 102401 THEN
+	BEGIN
+		WRITELN(999);
+	END;
 END;
 .

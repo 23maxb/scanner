@@ -142,7 +142,7 @@ public class Parser
             }
             else
                 a.add(parseStatement());
-        System.out.println(vars);
+        System.out.println("All Variables: " + vars);
         return new Program(new Block(a), new Environment(procedures, vars));
     }
 
@@ -166,6 +166,9 @@ public class Parser
     {
         Emitter a = new Emitter("output.asm");
         parseProgram().compile(a);
+        //need to close the file completely
+        a.emit("li $v0, 10");
+        a.emit("syscall");
         a.close();
     }
 

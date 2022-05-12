@@ -54,8 +54,8 @@ public class Writeln implements Statement
     public void compile(Emitter e)
     {
         e.emit("li $v0, 1");
-        exp.compile(e);
-        e.emit("move $a0, $v0");
+        exp.compile(e); // should put the evaluated expression in $t0
+        e.emit("move $a0, $t0");
         e.emit("syscall");
         //next need to print out a new line
         e.emit("li $a0 '\\n'");
