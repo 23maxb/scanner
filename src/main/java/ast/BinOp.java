@@ -128,7 +128,7 @@ public class BinOp implements Expression
             case ">=" -> {
                 String l = e.label();
                 e.emit("li $t0, 1");
-                e.emit("blt $t1, $t2, " + l);
+                e.emit("bgt $t1, $t2, " + l);
                 e.emit("beq $t1, $t2, " + l);
                 e.emit("li $t0, 0");
                 e.emit(l + ":");
@@ -136,7 +136,7 @@ public class BinOp implements Expression
             case "<=" -> {
                 String l = e.label();
                 e.emit("li $t0, 1");
-                e.emit("bgt $t1, $t2, " + l);
+                e.emit("blt $t1, $t2, " + l);
                 e.emit("beq $t1, $t2, " + l);
                 e.emit("li $t0, 0");
                 e.emit(l + ":");

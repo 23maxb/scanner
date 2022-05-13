@@ -62,7 +62,7 @@ public class If implements Statement
     {
         condition.compile(e);
         String a = e.label();
-        e.emit("beq $v0, $0, " + a);
+        e.emit("beq $t0, $0, " + a);
         b.compile(e);
         e.emit(a + ":");
     }

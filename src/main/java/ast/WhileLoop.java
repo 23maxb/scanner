@@ -53,7 +53,7 @@ public class WhileLoop implements Statement
     }
 
     /**
-     * Returns the required assembly code to run the Statement.
+     * Returns the required assembly code to run the while loop.
      *
      * @param e the emitter to use
      */
@@ -64,10 +64,10 @@ public class WhileLoop implements Statement
         String c = e.label();
         e.emit(c + ":");
         condition.compile(e);
-        e.emit("beq $v0, $0, " + a);
+        e.emit("beq $t0, $0, " + a);
         b.compile(e);
-        e.emit(a + ":");
         e.emit("j " + c);
+        e.emit(a + ":");
     }
 
 }
