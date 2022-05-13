@@ -1,13 +1,9 @@
 	VAR x;
-	VAR y, count;
 BEGIN
-	x := 2;
-	y := 4;
-	count := x + y;
-	count := count + 1;
-	IF count <= 102401 THEN
+    x := 2;
+	IF x == 2 THEN
 	BEGIN
-		WRITELN(999);
+		WRITELN(3);
 	END;
 END;
 .

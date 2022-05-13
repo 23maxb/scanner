@@ -165,7 +165,10 @@ public class Parser
     public void emit() throws ScanErrorException
     {
         Emitter a = new Emitter("output.asm");
-        parseProgram().compile(a);
+        Program c = parseProgram();
+        System.out.println("Program Tree: ");
+        System.out.println(c);
+        c.compile(a);
         //need to close the file completely
         a.emit("li $v0, 10");
         a.emit("syscall");
@@ -305,7 +308,7 @@ public class Parser
     private Expression parseConditional() throws ScanErrorException
     {
         Expression res = (parseExpression());
-        while ((currentToken.equals(">") || currentToken.equals("<")
+        while ((currentToken.equals("==") || currentToken.equals(">") || currentToken.equals("<")
                 || currentToken.equals("<=") || currentToken.equals(">=") || currentToken.equals(
                 "<>")))
         {
@@ -328,6 +331,11 @@ public class Parser
             {
                 eat(">=");
                 res = new BinOp(res, ">=", parseExpression());
+            }
+            else if (currentToken.compareTo("==") == 0)
+            {
+                eat("==");
+                res = new BinOp(res, "==", parseExpression());
             }
             else
             {
