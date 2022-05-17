@@ -99,6 +99,6 @@ public class Assignment implements Statement
     public void compile(Emitter e)
     {
         value.compile(e);
-        e.emit("sw $t0 var" + variableName);
+        e.emit("sw $t0 var" + variableName + "#pop off stack");
     }
 }

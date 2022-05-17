@@ -40,7 +40,8 @@ public class Parser
      */
     public static void main(String[] args) throws ScanErrorException, FileNotFoundException
     {
-        emit("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\customParserTest.txt");
+        emit("C:\\Users\\maxbl\\IdeaProjects\\scanner\\src\\main\\java\\parser\\parserTest9" +
+                ".txt");
     }
 
     /**

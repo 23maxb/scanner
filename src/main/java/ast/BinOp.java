@@ -97,8 +97,8 @@ public class BinOp implements Expression
         e.emit("move $t2, $t0");
         switch (operator)
         {
-            case "+" -> e.emit("add $t0, $t1, $t2");
-            case "-" -> e.emit("sub $t0, $t1, $t2");
+            case "+" -> e.emit("add $t0, $t1, $t2 #adding values");
+            case "-" -> e.emit("sub $t0, $t1, $t2 #subtracting values");
             case "/" -> {
                 e.emit("div $t1, $t2");
                 e.emit("mflo $t0");

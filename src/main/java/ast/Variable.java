@@ -67,6 +67,6 @@ public class Variable implements Expression
     @Override
     public void compile(Emitter e)
     {
-        e.emit("lw $t0, var" + name);
+        e.emit("lw $t0, var" + name + "#push on stack");
     }
 }
