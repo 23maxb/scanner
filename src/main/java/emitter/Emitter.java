@@ -1,6 +1,8 @@
 package emitter;
 
 
+import ast.ProcedureDeclaration;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,34 +42,21 @@ public class Emitter
         out.println(code);
     }
 
-    /**
-     * Sets the current method
-     *
-     * @param method the new method path
-     */
-    public void setCurrentMethod(String method)
+    //remember proc as current procedure context
+    public void setProcedureContext(ProcedureDeclaration proc)
     {
-        currentMethod = method;
+        currentMethod = proc.getName();
     }
 
-    /**
-     * Adds the method's name and how the program got there.
-     *
-     * @param methodName the name of the method
-     */
-    public void addMethod(String methodName)
-    {
-        currentMethod = currentMethod == null ? methodName : currentMethod + "." + methodName;
-    }
-
-    /**
-     * Resets the value of currentMethod to null (meaning the program is in the global scope)
-     *
-     * @return the current method
-     */
-    public void resetMethod()
+    //clear current procedure context (remember null)
+    public void clearProcedureContext()
     {
         currentMethod = null;
+    }
+
+    public boolean isLocalVariable(String varName)
+    {
+        return currentMethod != null && currentMethod.equals(varName);
     }
 
     public String getFileName()

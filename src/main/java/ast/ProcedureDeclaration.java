@@ -124,12 +124,14 @@ public class ProcedureDeclaration implements Statement
     @Override
     public void compile(Emitter e)
     {
+        e.setProcedureContext(this);
         compileParameters(e);
         e.emit(name + ":");
         e.emitPush("$ra");
         statement.compile(e);
         e.emitPop("$ra");
         e.emit("jr $ra");
+        e.clearProcedureContext();
     }
 
     /**
