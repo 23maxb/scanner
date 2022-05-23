@@ -124,11 +124,25 @@ public class ProcedureDeclaration implements Statement
     @Override
     public void compile(Emitter e)
     {
+        compileParameters(e);
         e.emit(name + ":");
         e.emitPush("$ra");
         statement.compile(e);
         e.emitPop("$ra");
         e.emit("jr $ra");
+    }
+
+    /**
+     * Sets up the parameters of the procedure. The parameters should be in the correct order.
+     *
+     * @param e the emitter to sue
+     */
+    private void compileParameters(Emitter e)
+    {
+        for (int i = 0; i < parameters.length; i++)
+        {
+            e.emitPop("$t" + (parameters.length - i)); //TODO check if this correctly works
+        }
     }
 
     /**

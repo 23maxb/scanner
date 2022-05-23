@@ -116,6 +116,11 @@ public class ProcedureCall implements Statement, Expression
     @Override
     public void compile(Emitter e)
     {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        for (Expression argument : arguments)
+        {
+            argument.compile(e);
+            e.emitPush("$t1");
+        }
+        e.emit("jal " + procedureCalled);
     }
 }
