@@ -125,9 +125,10 @@ public class ProcedureDeclaration implements Statement
     public void compile(Emitter e)
     {
         e.emit(name + ":");
-        e.emit("move $t1, $ra");
+        e.emitPush("$ra");
         statement.compile(e);
-        e.emit("jr $t1");
+        e.emitPop("$ra");
+        e.emit("jr $ra");
     }
 
     /**
