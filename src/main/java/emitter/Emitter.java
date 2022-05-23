@@ -13,12 +13,14 @@ import java.io.PrintWriter;
  */
 public class Emitter
 {
+    private String currentMethod;
     private final PrintWriter out;
     private final String fileName;
 
     //creates an emitter for writing to a new file with given name
     public Emitter(String outputFileName)
     {
+        currentMethod = null;
         fileName = outputFileName;
         try
         {
@@ -36,6 +38,36 @@ public class Emitter
         if (!code.endsWith(":"))
             code = "\t" + code;
         out.println(code);
+    }
+
+    /**
+     * Sets the current method
+     *
+     * @param method the new method path
+     */
+    public void setCurrentMethod(String method)
+    {
+        currentMethod = method;
+    }
+
+    /**
+     * Adds the method's name and how the program got there.
+     *
+     * @param methodName the name of the method
+     */
+    public void addMethod(String methodName)
+    {
+        currentMethod = currentMethod == null ? methodName : currentMethod + "." + methodName;
+    }
+
+    /**
+     * Resets the value of currentMethod to null (meaning the program is in the global scope)
+     *
+     * @return the current method
+     */
+    public void resetMethod()
+    {
+        currentMethod = null;
     }
 
     public String getFileName()

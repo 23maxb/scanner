@@ -141,7 +141,7 @@ public class ProcedureDeclaration implements Statement
     {
         for (int i = 0; i < parameters.length; i++)
         {
-            e.emitPop("$t" + (parameters.length - i)); //TODO check if this correctly works
+            e.emitPop("$t" + (parameters.length - i - 1)); //TODO check if this correctly works
         }
     }
 
