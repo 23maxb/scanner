@@ -1,3 +1,4 @@
+VAR ignore;
 PROCEDURE Add();
 BEGIN
 WRITELN(4);

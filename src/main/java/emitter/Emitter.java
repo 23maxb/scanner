@@ -61,7 +61,28 @@ public class Emitter
     {
         return "label" + labelCount++;
     }
-    //todo add emitter stuff
+
+    /**
+     * Pushes a new value onto the stack.
+     *
+     * @param reg the value to push onto the stack
+     */
+    public void emitPush(String reg)
+    {
+        emit("subu $sp $sp 4");
+        emit("sw $" + reg + " ($sp)");
+    }
+
+    /**
+     * pops a value off the stack.
+     *
+     * @param reg the value to pop the value into
+     */
+    public void emitPop(String reg)
+    {
+        emit("lw $" + reg + " ($sp)");
+        emit("addu $sp $sp 4");
+    }
 }
 
 
