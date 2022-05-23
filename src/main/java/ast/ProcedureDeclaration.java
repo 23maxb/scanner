@@ -124,7 +124,9 @@ public class ProcedureDeclaration implements Statement
     @Override
     public void compile(Emitter e)
     {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        e.emit(name + ":");
+        statement.compile(e);
+        e.emit("jr $ra");
     }
 
     /**
@@ -132,6 +134,7 @@ public class ProcedureDeclaration implements Statement
      *
      * @param currentEnvironment the current environment
      */
+    @Override
     public void exec(Environment currentEnvironment)
     {
         currentEnvironment.addProcedure(this);
